@@ -1,27 +1,35 @@
-import { expect, test, describe, beforeAll } from "vitest";
+import { expect, test, describe, beforeAll, afterAll } from "vitest";
 import { AptosConfig, Network, Aptos, Ed25519Account } from "@aptos-labs/ts-sdk";
 import { addNewListTransaction } from "../frontend/entry-functions/addNewList";
 import { addNewTaskTransaction } from "../frontend/entry-functions/addNewTask";
 import { completeTaskTransaction } from "../frontend/entry-functions/completeTask";
 // workspace APIs
-import { generateTestAccount, publishPackage } from "../../workspace";
+import { TestNode, generateTestAccount, publishPackage } from "../../workspace";
 
-const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-const aptos = new Aptos(aptosConfig);
-
+let network: TestNode;
+let aptos: Aptos;
 let publisherAccount: Ed25519Account;
 let todoListCreator: Ed25519Account;
 
 describe("todoList", () => {
   beforeAll(async () => {
+    network = await TestNode.spawn();
+    aptos = network.client();
+    //aptos = new Aptos(new AptosConfig({ network: Network.LOCAL }));
+    console.log(aptos.config);
     publisherAccount = await generateTestAccount();
+    console.log("test account generated");
     await publishPackage({
       publisher: publisherAccount,
       namedAddresses: {
         module_addr: publisherAccount.accountAddress.toString(),
       },
     });
-  }, 20000);
+  }, 60000);
+
+  afterAll(async () => {
+    network.stop()
+  });
 
   test("it publishes the contract under the correct address", async () => {
     const accountModule = await aptos.getAccountModule({
