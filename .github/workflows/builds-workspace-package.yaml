@@ -1,0 +1,30 @@
+name: Build the workspace package
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}-${{ github.workflow }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Install node and pnpm.
+      - uses: actions/setup-node@v3
+        with:
+          registry-url: "https://registry.npmjs.org"
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 8.9.0
+
+      - name: Build workspace package
+        run: |
+          cd workspace
+          pnpm install
+          pnpm build
