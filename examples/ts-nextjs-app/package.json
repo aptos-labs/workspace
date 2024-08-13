@@ -1,0 +1,30 @@
+{
+  "name": "ts-next-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "npx aw"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "14.2.5",
+    "@aptos-labs/ts-sdk": "^1.26.0",
+    "@aptos-labs/wallet-adapter-react": "^3.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@aptos-labs/workspace": "link:../../workspace",
+    "@types/chai": "4",
+    "@types/mocha": "^10.0.7",
+    "chai": "4",
+    "ts-node": "latest"
+  }
+}
