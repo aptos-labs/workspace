@@ -19,6 +19,9 @@ const DEFAULT_CONFIG: Options = {
   splitting: true,
   target: "es2020",
   platform: "node",
+  banner: {
+    js: "#!/usr/bin/env node",
+  },
 };
 
 // Common.js config

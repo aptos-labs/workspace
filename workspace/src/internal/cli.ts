@@ -11,8 +11,9 @@ program
 program
   .command("test")
   .description("Run unit tests")
-  .action(async () => {
-    await test();
+  .option("-t, --timeout <treshold>", "timeout treshold")
+  .action(async (options) => {
+    await test(options);
   });
 
 program.parse();

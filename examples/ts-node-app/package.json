@@ -10,7 +10,8 @@
     "move:publish": "node ./scripts/move/publish",
     "move:upgrade": "node ./scripts/move/upgrade",
     "dev": "ts-node index.ts",
-    "test": "npx aptos-workspace test",
+    "test": "pnpm aptos-workspace test",
+    "test:ci": "pnpm aptos-workspace test --timeout 300000",
     "build": "tsc",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "_fmt": "prettier 'frontend/**/*.ts'",
@@ -20,7 +21,8 @@
     "@aptos-labs/ts-sdk": "^1.26.0"
   },
   "devDependencies": {
-    "@aptos-labs/workspace": "link:../../workspace",
+    "@aptos-labs/workspace": "file:../../workspace",
+    "@aptos-labs/aptos-cli": "^0.2.0",
     "@types/chai": "4",
     "@types/mocha": "^10.0.7",
     "@types/node": "^20.14.14",
