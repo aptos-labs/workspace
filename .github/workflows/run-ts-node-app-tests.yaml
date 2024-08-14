@@ -1,0 +1,45 @@
+name: Run the ts-node-app tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}-${{ github.workflow }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Install node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      # Install pnpm
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 8.9.0
+
+      - name: print versions
+        run: |
+          node -v
+          npm -v
+          pnpm -v
+
+      - name: Build workspace local package
+        run: |
+          cd workspace
+          pnpm install
+          pnpm build
+
+      - name: Run ts-node-app tests
+        run: |
+          cd examples/ts-node-app
+          pnpm install
+          ls -al ./node_modules/.bin
+          pnpm run test
