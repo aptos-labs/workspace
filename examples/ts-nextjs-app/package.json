@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "npx aw"
+    "test": "npx aptos-workspace test"
   },
   "dependencies": {
     "react": "^18",

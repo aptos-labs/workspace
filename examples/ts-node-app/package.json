@@ -10,7 +10,7 @@
     "move:publish": "node ./scripts/move/publish",
     "move:upgrade": "node ./scripts/move/upgrade",
     "dev": "ts-node index.ts",
-    "test": "env TS_NODE_PROJECT=\"tsconfig.testing.json\" npx aw",
+    "test": "npx aptos-workspace test",
     "build": "tsc",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "_fmt": "prettier 'frontend/**/*.ts'",

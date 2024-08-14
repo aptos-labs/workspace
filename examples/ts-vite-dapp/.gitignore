@@ -33,3 +33,7 @@ pnpm-lock.yaml
 
 # template related files
 example-collection/
+
+# Move
+move/build
+move/test-package.json
