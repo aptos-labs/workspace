@@ -1,1 +1,0 @@
-{"version":3,"file":"addNewList.js","sourceRoot":"","sources":["../../entry-functions/addNewList.ts"],"names":[],"mappings":";;;AAYO,MAAM,qBAAqB,GAAG,CACnC,aAAsB,EACA,EAAE;IACxB,OAAO;QACL,IAAI,EAAE;YACJ,QAAQ,EAAE,GAAG,aAAa,CAAC,CAAC,CAAC,aAAa,CAAC,CAAC,CAAC,OAAO,CAAC,GAAG,CAAC,cAAc,yBAAyB;YAChG,iBAAiB,EAAE,EAAE;SACtB;KACF,CAAC;AACJ,CAAC,CAAC;AATW,QAAA,qBAAqB,yBAShC"}

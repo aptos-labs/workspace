@@ -1,6 +1,6 @@
 {
   "name": "@aptos-labs/workspace",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "Apache-2.0",
   "main": "dist/common/api.js",
   "module": "dist/esm/api.mjs",
@@ -32,14 +32,14 @@
     "sample-project/"
   ],
   "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.26.0",
     "commander": "^12.1.0",
     "find-up": "^2.1.0",
+    "fs-extra": "^7.0.1",
     "mocha": "^10.7.0",
-    "tsconfig-paths": "^4.2.0",
-    "fs-extra": "^7.0.1"
+    "tsconfig-paths": "^4.2.0"
   },
   "peerDependencies": {
-    "@aptos-labs/ts-sdk": "^1.26.0",
     "@types/chai": "^4.2.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "^20.14.11",
@@ -50,6 +50,7 @@
   "devDependencies": {
     "@types/chai": "^4.2.0",
     "@types/find-up": "^2.1.1",
+    "@types/fs-extra": "^5.1.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "^20.14.11",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
@@ -61,7 +62,6 @@
     "prettier": "^3.3.2",
     "ts-node": "10.9.1",
     "tsup": "^8.2.4",
-    "typescript": "^5.2.2",
-    "@types/fs-extra": "^5.1.0"
+    "typescript": "^5.2.2"
   }
 }

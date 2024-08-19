@@ -19,9 +19,7 @@ let todoListCreator: Ed25519Account;
 describe("todoList", () => {
   before(function (done) {
     (async () => {
-      console.log("here");
       publisherAccount = await generateTestAccount();
-      console.log("here2");
       await publishPackage({
         publisher: publisherAccount,
         namedAddresses: {

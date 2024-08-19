@@ -10,7 +10,11 @@ import {
   isUserProjectTestsFolderExists,
 } from "../internal/utils/source-files";
 
-export const test = async () => {
+export type TestOptionsTypes = {
+  timeout: string;
+};
+
+export const test = async (options: TestOptionsTypes) => {
   const userProjectPath = process.cwd();
 
   isUserProjectTsConfigFileExists(userProjectPath);
@@ -26,7 +30,7 @@ export const test = async () => {
   const { default: Mocha } = await import("mocha");
 
   const mochaConfig: MochaOptions = {
-    timeout: 30000, // to support local testnet run, TODO improve performance
+    timeout: options.timeout ?? 20000, // to support local testnet run, TODO improve performance
   };
   const mocha = new Mocha(mochaConfig);
   // add the internal workspace setup.js file to mocha to run
