@@ -1790,6 +1790,7 @@ packages:
       find-up: 2.1.0
       fs-extra: 7.0.1
       mocha: 10.7.3
+      tree-kill: 1.2.2
       ts-node: 10.9.1(@types/node@20.16.1)(typescript@5.5.4)
       tsconfig-paths: 4.2.0
       typescript: 5.5.4

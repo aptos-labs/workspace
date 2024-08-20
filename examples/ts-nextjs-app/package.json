@@ -1,13 +1,14 @@
 {
   "name": "ts-next-app",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "npx aptos-workspace test"
+    "test": "pnpm aptos-workspace test",
+    "test:ci": "pnpm aptos-workspace test --timeout 300000"
   },
   "dependencies": {
     "react": "^18",
@@ -21,7 +22,8 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@aptos-labs/workspace": "link:../../workspace",
+    "@aptos-labs/workspace": "file:../../workspace",
+    "@aptos-labs/aptos-cli": "^0.2.0",
     "@types/chai": "4",
     "@types/mocha": "^10.0.7",
     "chai": "4",
