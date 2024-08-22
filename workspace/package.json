@@ -22,7 +22,7 @@
   },
   "scripts": {
     "build:clean": "rm -rf dist",
-    "build": "pnpm build:clean && tsup",
+    "build": "npm run build:clean && tsup",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "fmt": "prettier -- --write"
   },

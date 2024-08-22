@@ -18,21 +18,21 @@ jobs:
       # Install node
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "21"
 
-      # Install pnpm
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 8.9.0
+      # # Install pnpm
+      # - uses: pnpm/action-setup@v4
+      #   with:
+      #     version: 8.9.0
 
       - name: Build workspace local package
         run: |
           cd workspace
-          pnpm install
-          pnpm build
+          npm install
+          npm run build
 
       - name: Install ts-node-app dependencies
         run: |
           cd examples/ts-node-app
-          pnpm install
-          pnpm test:ci
+          npm install
+          npm run test:ci
