@@ -15,16 +15,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Install node and pnpm.
-      - uses: actions/setup-node@v3
+      # Install node
+      - uses: actions/setup-node@v4
         with:
-          registry-url: "https://registry.npmjs.org"
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 8.9.0
+          node-version: "20"
 
       - name: Build workspace package
         run: |
           cd workspace
-          pnpm install
-          pnpm build
+          npm install
+          npm run build
