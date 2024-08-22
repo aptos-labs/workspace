@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "pnpm aptos-workspace test",
-    "test:ci": "pnpm aptos-workspace test --timeout 300000"
+    "test": "npx aptos-workspace test",
+    "test:ci": "npx aptos-workspace test --timeout 300000"
   },
   "dependencies": {
     "react": "^18",
@@ -23,7 +23,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@aptos-labs/workspace": "file:../../workspace",
-    "@aptos-labs/aptos-cli": "^0.2.0",
     "@types/chai": "4",
     "@types/mocha": "^10.0.7",
     "chai": "4",

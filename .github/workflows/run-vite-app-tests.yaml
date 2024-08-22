@@ -20,19 +20,19 @@ jobs:
         with:
           node-version: "20"
 
-      # Install pnpm
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 8.9.0
+      # # Install pnpm
+      # - uses: pnpm/action-setup@v4
+      #   with:
+      #     version: 8.9.0
 
       - name: Build workspace local package
         run: |
           cd workspace
-          pnpm install
-          pnpm build
+          npm install
+          npm run build
 
       - name: Run ts-vite-dapp tests
         run: |
           cd examples/ts-vite-dapp
-          pnpm install
-          pnpm test:ci
+          npm install
+          npm run test:ci
