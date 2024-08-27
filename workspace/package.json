@@ -2,24 +2,13 @@
   "name": "@aptos-labs/workspace",
   "version": "0.0.2",
   "license": "Apache-2.0",
-  "main": "dist/common/api.js",
-  "module": "dist/esm/api.mjs",
   "bin": {
-    "aptos-workspace": "./dist/common/internal/cli.js"
+    "aptos-workspace": "./dist/internal/cli.js"
   },
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "require": {
-        "types": "./dist/common/api.d.ts",
-        "default": "./dist/common/api.js"
-      },
-      "import": {
-        "types": "./dist/esm/api.d.mts",
-        "default": "./dist/esm/api.mjs"
-      }
-    }
-  },
+  "package.json": "./package.json",
+  "main": "./dist/api.js",
+  "module": "./dist/esm/api.mjs",
+  "types": "./dist/api.d.ts",
   "scripts": {
     "build:clean": "rm -rf dist",
     "build": "npm run build:clean && tsup",
