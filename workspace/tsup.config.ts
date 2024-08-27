@@ -1,13 +1,6 @@
 import { defineConfig } from "tsup";
-import type { Options, Format } from "tsup";
+import type { Options } from "tsup";
 
-// Ensure that these option fields are not undefined
-type MandatoryOptions = Options & {
-  outDir: string;
-  format: Format | Format[];
-};
-
-// Default config, used as a base template
 const DEFAULT_CONFIG: Options = {
   bundle: true,
   clean: true, // clean up the dist folder
@@ -20,22 +13,10 @@ const DEFAULT_CONFIG: Options = {
   target: "es2020",
   platform: "node",
   banner: {
-    js: "#!/usr/bin/env node",
+    js: "#!/usr/bin/env node", // add shebang to support node env
   },
-};
-
-// Common.js config
-const COMMON_CONFIG: MandatoryOptions = {
-  ...DEFAULT_CONFIG,
   format: "cjs",
-  outDir: "dist/common",
+  outDir: "dist",
 };
 
-// ESM config
-const ESM_CONFIG: MandatoryOptions = {
-  ...DEFAULT_CONFIG,
-  format: "esm",
-  outDir: "dist/esm",
-};
-
-export default defineConfig([COMMON_CONFIG, ESM_CONFIG]);
+export default defineConfig(DEFAULT_CONFIG);
