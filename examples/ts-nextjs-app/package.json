@@ -15,7 +15,7 @@
     "react-dom": "^18",
     "next": "14.2.5",
     "@aptos-labs/ts-sdk": "^1.26.0",
-    "@aptos-labs/wallet-adapter-react": "^3.5.0"
+    "@aptos-labs/wallet-adapter-react": "^3.5.10"
   },
   "devDependencies": {
     "typescript": "^5",
