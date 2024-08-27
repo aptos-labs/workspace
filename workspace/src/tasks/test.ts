@@ -1,42 +1,41 @@
 import path from "path";
 import fsPromises from "fs/promises";
-import { MochaOptions } from "mocha";
-import { TSCONFIG_TESTING_JSON } from "../internal/utils/consts";
-import { loadTsNode } from "../internal/utils/typescript-support";
 import { getUserProjectPackageJson } from "../internal/utils/packageInfo";
 import {
   getUserProjectTestsFolder,
   isUserProjectTsConfigFileExists,
   isUserProjectTestsFolderExists,
 } from "../internal/utils/source-files";
+import { mochaGlobalSetup, mochaGlobalTeardown } from "../internal/fixtures";
 
-export type TestOptionsTypes = {
+export type TestOptionsArguments = {
   timeout: string;
+  grep: string;
 };
 
-export const test = async (options: TestOptionsTypes) => {
+export const test = async (options: TestOptionsArguments) => {
   const userProjectPath = process.cwd();
 
   isUserProjectTsConfigFileExists(userProjectPath);
 
   isUserProjectTestsFolderExists(userProjectPath);
 
-  // set env variable so workspace use the correct tsconfig file
-  process.env.TS_NODE_PROJECT = TSCONFIG_TESTING_JSON;
-
-  // Load TS support
-  await loadTsNode();
-
   const { default: Mocha } = await import("mocha");
 
-  const mochaConfig: MochaOptions = {
+  const mochaConfig = {
     timeout: options.timeout ?? 20000, // to support local testnet run, TODO improve performance
+    require: [path.join(__dirname, "internal/register.js")], // register ts-node support
+    globalSetup: [mochaGlobalSetup], // fixture to run before all tests only once
+    globalTeardown: [mochaGlobalTeardown], // fixture to run after all tests only once
+    parallel: true,
+    grep: "",
   };
+
+  if (options.grep !== undefined) {
+    mochaConfig.grep = options.grep;
+  }
+
   const mocha = new Mocha(mochaConfig);
-  // add the internal workspace setup.js file to mocha to run
-  // processes before and after tests.
-  const setupPath = path.join(__dirname, "internal/setup.js");
-  mocha.addFile(setupPath);
 
   // add all user's porject test files to mocha
   const dir = await fsPromises.readdir(

@@ -32,7 +32,6 @@
     "sample-project/"
   ],
   "dependencies": {
-    "@aptos-labs/ts-sdk": "^1.26.0",
     "commander": "^12.1.0",
     "find-up": "^2.1.0",
     "fs-extra": "^7.0.1",
@@ -46,9 +45,16 @@
     "@types/node": "^20.14.11",
     "chai": "^4.0.0",
     "ts-node": ">=8.0.0",
-    "typescript": ">=4.5.0"
+    "typescript": ">=4.5.0",
+    "@aptos-labs/ts-sdk": ">=1.26.0"
+  },
+  "peerDependenciesMeta": {
+    "@aptos-labs/ts-sdk": {
+      "optional": false
+    }
   },
   "devDependencies": {
+    "@aptos-labs/ts-sdk": "^1.26.0",
     "@types/chai": "^4.2.0",
     "@types/find-up": "^2.1.1",
     "@types/fs-extra": "^5.1.0",
