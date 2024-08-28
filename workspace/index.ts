@@ -6,6 +6,7 @@ import {
   Network,
   AccountAddress,
   ModuleId,
+  WaitForTransactionOptions,
 } from "@aptos-labs/ts-sdk";
 import path, { resolve } from "path";
 import fs from "fs";
@@ -15,21 +16,19 @@ import kill from "tree-kill";
 import * as readline from 'readline';
 import { rejects } from "assert";
 
-const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-const aptos = new Aptos(aptosConfig);
-
-export const generateTestAccount = async () => {
+export const generateTestAccount = async (aptos: Aptos) => {
   const account = Account.generate();
 
-  await aptos.fundAccount({
+  let res = await aptos.fundAccount({
     accountAddress: account.accountAddress,
     amount: 1_000_000_000,
+    options: { waitForIndexer: false }
   });
 
   return account;
 };
 
-export const publishPackage = async (args: {
+export const publishPackage = async (aptos: Aptos, args: {
   publisher: Account;
   namedAddresses: Record<string, AccountAddressInput>;
 }) => {
@@ -96,8 +95,13 @@ export class TestNode {
   private constructor(private info: NodeInfo | null) { }
 
   public static async spawn(): Promise<TestNode> {
-    const cliCommand = "aptos";
-    const cliArgs = ["node", "run-local-testnet", "--force-restart", "--assume-yes", "--with-indexer-api"];
+    console.log("spawn node")
+
+    //const cliCommand = "aptos";
+    //const cliArgs = ["node", "run-local-testnet", "--force-restart", "--assume-yes", "--with-indexer-api"];
+
+    const cliCommand = "aptos-workspace-server";
+    const cliArgs: string[] = [];
 
     const childProcess = spawn(cliCommand, cliArgs);
 
@@ -126,15 +130,19 @@ export class TestNode {
         while ((match = pattern.exec(line)) !== null) {
           if (match[1]) {
             rest_api_port = Number(match[1]);
+            console.log(`rest api port ${rest_api_port}`);
           }
           if (match[2]) {
             faucet_port = Number(match[2]);
+            console.log(`faucet port ${faucet_port}`);
           }
           if (match[3]) {
             indexer_port = Number(match[3]);
+            console.log(`indexer port ${indexer_port}`);
           }
 
-          if (rest_api_port && faucet_port && indexer_port) {
+          if (rest_api_port && faucet_port && indexer_port != undefined) {
+            console.log("local node up");
             clearTimeout(timeout); // Clear timeout when ports are found
             rl.removeAllListeners("line");
             resolve(); // Resolve the promise when both ports are found
@@ -153,7 +161,7 @@ export class TestNode {
     try {
       await portPromise; // Wait for the promise to resolve or reject
 
-      // The indexer API is not ready enough though it claims it is.
+      // The indexer API is not ready even though it claims it is.
       await sleep(1000);
 
       const node = new TestNode({
@@ -182,13 +190,15 @@ export class TestNode {
       network: Network.CUSTOM,
       fullnode: `http://localhost:${this.info.rest_api_port}/v1`,
       faucet: `http://localhost:${this.info.faucet_port}`,
-      indexer: `http://localhost:${this.info.indexer_port}/v1/graphql`,
+      //indexer: `http://localhost:${this.info.indexer_port}/v1/graphql`,
     }));
   }
 
   public stop() {
     if (this.info) {
       if (this.info.process?.pid) {
+        // Not working for some reason..
+        console.log("kill", this.info.process?.pid);
         kill(this.info.process.pid);
       }
     }

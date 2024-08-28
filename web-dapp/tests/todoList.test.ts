@@ -1,5 +1,5 @@
 import { expect, test, describe, beforeAll, afterAll } from "vitest";
-import { AptosConfig, Network, Aptos, Ed25519Account } from "@aptos-labs/ts-sdk";
+import { AptosConfig, Network, Aptos, Ed25519Account, AccountAddress } from "@aptos-labs/ts-sdk";
 import { addNewListTransaction } from "../frontend/entry-functions/addNewList";
 import { addNewTaskTransaction } from "../frontend/entry-functions/addNewTask";
 import { completeTaskTransaction } from "../frontend/entry-functions/completeTask";
@@ -17,14 +17,15 @@ describe("todoList", () => {
     aptos = network.client();
     //aptos = new Aptos(new AptosConfig({ network: Network.LOCAL }));
     console.log(aptos.config);
-    publisherAccount = await generateTestAccount();
+    publisherAccount = await generateTestAccount(aptos);
     console.log("test account generated");
-    await publishPackage({
+    await publishPackage(aptos, {
       publisher: publisherAccount,
       namedAddresses: {
         module_addr: publisherAccount.accountAddress.toString(),
       },
     });
+
   }, 60000);
 
   afterAll(async () => {
@@ -40,7 +41,7 @@ describe("todoList", () => {
   });
 
   test("it creates a new list", async () => {
-    todoListCreator = await generateTestAccount();
+    todoListCreator = await generateTestAccount(aptos);
     const addNewListTxn = await addNewListTransaction(publisherAccount.accountAddress.toString());
 
     const transaction = await aptos.transaction.build.simple({
