@@ -5,10 +5,21 @@ import {
   AptosConfig,
   Network,
   AccountAddress,
+  Ed25519Account,
 } from "@aptos-labs/ts-sdk";
 import path from "path";
 import fs from "fs";
 import { Move } from "@aptos-labs/ts-sdk/dist/common/cli/index.js";
+
+export interface WorkspaceGlobal extends NodeJS.Global {
+  aptos: Aptos;
+  publisherAccount: Ed25519Account;
+}
+
+// Declare the extended global variable
+declare var global: WorkspaceGlobal;
+
+export var workspaceGlobal: WorkspaceGlobal = global;
 
 const aptosConfig = new AptosConfig({ network: Network.LOCAL });
 const aptos = new Aptos(aptosConfig);
