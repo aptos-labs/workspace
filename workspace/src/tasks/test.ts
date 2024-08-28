@@ -24,9 +24,10 @@ export const test = async (options: TestOptionsArguments) => {
 
   const mochaConfig = {
     timeout: options.timeout ?? 20000, // to support local testnet run, TODO improve performance
-    require: [path.join(__dirname, "internal/register.js")], // register ts-node support
-    globalSetup: [mochaGlobalSetup], // fixture to run before all tests only once
-    globalTeardown: [mochaGlobalTeardown], // fixture to run after all tests only once
+    require: [
+      path.join(__dirname, "internal/register.js"),
+      path.join(__dirname, "internal/rootHooks.js"),
+    ], // register ts-node support
     parallel: true,
     grep: "",
   };
