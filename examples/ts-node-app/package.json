@@ -18,21 +18,22 @@
     "fmt": "npm run _fmt -- --write"
   },
   "dependencies": {
-    "@aptos-labs/ts-sdk": "^1.26.0"
+    "@aptos-labs/ts-sdk": "^1.27.1"
   },
   "devDependencies": {
-    "@aptos-labs/workspace": "file:../../workspace",
-    "@types/chai": "4",
+    "@aptos-labs/aptos-cli": "^0.2.0",
+    "@aptos-labs/workspace": "link:../../workspace",
+    "@types/chai": "^4.3.19",
     "@types/mocha": "^10.0.7",
-    "@types/node": "^20.14.14",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "chai": "4",
+    "@types/node": "^20.16.2",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "chai": "^4.5.0",
     "dotenv": "16.3.1",
     "eslint": "^8.57.0",
-    "prettier": "^3.3.2",
+    "prettier": "^3.3.3",
     "tree-kill": "1.2.2",
     "ts-node": "10.9.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.5.4"
   }
 }

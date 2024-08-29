@@ -21,19 +21,17 @@ declare var global: WorkspaceGlobal;
 
 export var workspaceGlobal: WorkspaceGlobal = global;
 
-const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-const aptos = new Aptos(aptosConfig);
-
-export const generateTestAccount = async () => {
+export const generateTestAccount = async (aptos: Aptos) => {
   const account = Account.generate();
   await aptos.fundAccount({
     accountAddress: account.accountAddress,
     amount: 1_000_000_000,
+    options: { waitForIndexer: false },
   });
   return account;
 };
 
-export const publishPackage = async (args: {
+export const publishPackage = async (aptos: Aptos, args: {
   publisher: Account;
   namedAddresses: Record<string, AccountAddressInput>;
 }) => {

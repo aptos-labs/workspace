@@ -17,7 +17,7 @@ describe("todoList2", () => {
   });
 
   it("it creates a new list", async () => {
-    todoListCreator = await generateTestAccount();
+    todoListCreator = await generateTestAccount(workspaceGlobal.aptos);
     const addNewListTxn = await addNewListTransaction(
       workspaceGlobal.publisherAccount.accountAddress.toString()
     );
