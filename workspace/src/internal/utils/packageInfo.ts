@@ -2,12 +2,12 @@ import findup from "find-up";
 import path from "path";
 import fsExtra from "fs-extra";
 
-export function findClosestWorkspacePackageJson(file: string): string | null {
-  return findup.sync("package.json", { cwd: path.dirname(file) });
-}
-
+/**
+ * Returns Workspace package.json path
+ */
 export function getWorkspacePackageJsonPath(): string {
-  return findClosestWorkspacePackageJson(__filename)!;
+  return findup.sync("package.json", { cwd: path.dirname(__filename) })!;
+  //return findClosestWorkspacePackageJson(__filename)!;
 }
 
 /**

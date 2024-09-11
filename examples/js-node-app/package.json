@@ -1,0 +1,31 @@
+{
+  "name": "biolerplate-template",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "move:init": "node ./scripts/init",
+    "move:test": "node ./scripts/move/test",
+    "move:compile": "node ./scripts/move/compile",
+    "move:publish": "node ./scripts/move/publish",
+    "move:upgrade": "node ./scripts/move/upgrade",
+    "dev": "ts-node index.ts",
+    "test": "npx aptos-workspace test",
+    "test:ci": "npx aptos-workspace test --timeout 300000",
+    "build": "tsc",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "_fmt": "prettier 'frontend/**/*.ts'",
+    "fmt": "npm run _fmt -- --write"
+  },
+  "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.26.0"
+  },
+  "devDependencies": {
+    "@aptos-labs/workspace": "file:../../workspace",
+    "chai": "4",
+    "dotenv": "16.3.1",
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.2",
+    "tree-kill": "1.2.2"
+  }
+}

@@ -7,29 +7,41 @@ import {
   isUserProjectTestsFolderExists,
 } from "../internal/utils/source-files";
 import { mochaGlobalSetup, mochaGlobalTeardown } from "../internal/fixtures";
+import { MochaOptions } from "mocha";
+import { isTSProject } from "../internal/utils/typescript-support";
 
 export type TestOptionsArguments = {
   timeout: string;
   grep: string;
 };
 
+export type CustomMochaOptions = MochaOptions & {
+  globalSetup: [() => {}];
+  globalTeardown: [() => {}];
+};
+
 export const test = async (options: TestOptionsArguments) => {
   const userProjectPath = process.cwd();
-
-  isUserProjectTsConfigFileExists(userProjectPath);
 
   isUserProjectTestsFolderExists(userProjectPath);
 
   const { default: Mocha } = await import("mocha");
 
-  const mochaConfig = {
+  const mochaConfig: CustomMochaOptions = {
     timeout: options.timeout ?? 20000, // to support local testnet run, TODO improve performance
-    require: [path.join(__dirname, "internal/register.js")], // register ts-node support
+    require: [],
     globalSetup: [mochaGlobalSetup], // fixture to run before all tests only once
     globalTeardown: [mochaGlobalTeardown], // fixture to run after all tests only once
     parallel: true,
     grep: "",
   };
+
+  if (isTSProject()) {
+    isUserProjectTsConfigFileExists(userProjectPath);
+    const mochaRequire = mochaConfig.require ?? [];
+    mochaRequire.push(path.join(__dirname, "internal/register.js"));
+    mochaConfig.require = mochaRequire;
+  }
 
   if (options.grep !== undefined) {
     mochaConfig.grep = options.grep;

@@ -1,5 +1,6 @@
 import { TSCONFIG_TESTING_JSON } from "./consts";
 import { TYPESCRIPT_NOT_INSTALLED, TS_NODE_NOT_INSTALLED } from "./errors";
+import { getUserConfigPath } from "./userConfig";
 
 export const loadTsNode = () => {
   try {
@@ -24,3 +25,16 @@ export const loadTsNode = () => {
   // register tsconfig-paths so nodejs would understand the "path" if set in the tsconfig file
   require("tsconfig-paths/register");
 };
+
+export const isTSProject = () => {
+  const workspaceConfigFile = getUserConfigPath();
+  return isTypescriptFile(workspaceConfigFile);
+};
+
+export function isTypescriptFile(path: string): boolean {
+  return /\.(ts|cts|mts)$/i.test(path);
+}
+
+export function isJavascriptFile(path: string): boolean {
+  return /\.(js|cjs|mjs)$/i.test(path);
+}

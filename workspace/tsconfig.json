@@ -10,7 +10,8 @@
     "esModuleInterop": true,
     "noEmitOnError": true,
     "skipDefaultLibCheck": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noImplicitAny": false
   },
   "include": ["./src/**/*.ts", "tests"],
   "exclude": ["node_modules"]
