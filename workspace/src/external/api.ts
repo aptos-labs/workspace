@@ -1,3 +1,4 @@
+import findup from "find-up";
 import {
   Account,
   AccountAddressInput,
@@ -9,6 +10,7 @@ import {
 import path from "path";
 import fs from "fs";
 import { Move } from "@aptos-labs/ts-sdk/dist/common/cli/index.js";
+import { getUserConfigContractDir } from "../internal/utils/userConfig";
 
 const aptosConfig = new AptosConfig({ network: Network.LOCAL });
 const aptos = new Aptos(aptosConfig);
@@ -27,7 +29,12 @@ export const publishPackage = async (args: {
   namedAddresses: Record<string, AccountAddressInput>;
 }) => {
   const { publisher, namedAddresses } = args;
-  await compilePackage("move", "move/test-package.json", namedAddresses);
+  const contractDir = getUserConfigContractDir();
+  await compilePackage(
+    contractDir,
+    `${contractDir}/test-package.json`,
+    namedAddresses
+  );
 
   const { metadataBytes, byteCode } = await getPackageBytesToPublish();
 
@@ -78,7 +85,8 @@ async function getPackageBytesToPublish() {
   // current working directory - the root folder of this repo
   const cwd = process.cwd();
   // target directory - current working directory + filePath (filePath json file is generated with the prevoius, compilePackage, cli command)
-  const modulePath = path.join(cwd, "move/test-package.json");
+  const contractDir = getUserConfigContractDir();
+  const modulePath = path.join(cwd, `${contractDir}/test-package.json`);
 
   const jsonData = JSON.parse(fs.readFileSync(modulePath, "utf8"));
 
