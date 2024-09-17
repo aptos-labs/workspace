@@ -1,13 +1,13 @@
 import { expect } from "chai";
-import { generateTestAccount, publishPackage } from "@aptos-labs/workspace";
-import { AptosConfig, Network, Aptos } from "@aptos-labs/ts-sdk";
-
-const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-const aptos = new Aptos(aptosConfig);
+import {
+  generateTestAccount,
+  publishPackage,
+  describe,
+} from "@aptos-labs/workspace";
 
 let publisherAccount;
 
-describe("my first test", () => {
+describe("my first test", (aptos) => {
   before(function (done) {
     (async () => {
       publisherAccount = await generateTestAccount();

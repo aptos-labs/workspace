@@ -2,19 +2,16 @@ const expect = require("chai").expect;
 const {
   generateTestAccount,
   publishPackage,
+  describe,
 } = require("@aptos-labs/workspace");
-const { AptosConfig, Network, Aptos } = require("@aptos-labs/ts-sdk");
 const { addNewListTransaction } = require("../entry-functions/addNewList");
 const { addNewTaskTransaction } = require("../entry-functions/addNewTask");
 const { completeTaskTransaction } = require("../entry-functions/completeTask");
 
-const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-const aptos = new Aptos(aptosConfig);
-
 let publisherAccount;
 let todoListCreator;
 
-describe("todoList", () => {
+describe("todoList", (aptos) => {
   before(function (done) {
     (async () => {
       publisherAccount = await generateTestAccount();
