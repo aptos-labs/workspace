@@ -2,15 +2,12 @@ const expect = require("chai").expect;
 const {
   generateTestAccount,
   publishPackage,
+  describe,
 } = require("@aptos-labs/workspace");
-const { AptosConfig, Network, Aptos } = require("@aptos-labs/ts-sdk");
-
-const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-const aptos = new Aptos(aptosConfig);
 
 let publisherAccount;
 
-describe("my first test", () => {
+describe("my first test", (aptos) => {
   before(function (done) {
     (async () => {
       publisherAccount = await generateTestAccount();

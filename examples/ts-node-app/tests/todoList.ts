@@ -1,22 +1,18 @@
 import { expect } from "chai";
-import { generateTestAccount, publishPackage } from "@aptos-labs/workspace";
 import {
-  AptosConfig,
-  Network,
-  Aptos,
-  Ed25519Account,
-} from "@aptos-labs/ts-sdk";
+  generateTestAccount,
+  publishPackage,
+  describe,
+} from "@aptos-labs/workspace";
+import { Ed25519Account } from "@aptos-labs/ts-sdk";
 import { addNewListTransaction } from "../entry-functions/addNewList";
 import { addNewTaskTransaction } from "../entry-functions/addNewTask";
 import { completeTaskTransaction } from "../entry-functions/completeTask";
 
-const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-const aptos = new Aptos(aptosConfig);
-
 let publisherAccount: Ed25519Account;
 let todoListCreator: Ed25519Account;
 
-describe("todoList", () => {
+describe("todoList", (aptos) => {
   before(function (done) {
     (async () => {
       publisherAccount = await generateTestAccount();
