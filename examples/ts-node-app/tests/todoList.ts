@@ -25,6 +25,13 @@ describe("todoList", (aptos) => {
     objectAddress = packageObjectAddress;
   });
 
+  it("uses an indexer function", async () => {
+    const indexerFunction = await aptos.getAccountCoinsData({
+      accountAddress: objectAddress,
+    });
+    expect(indexerFunction).to.not.undefined;
+  });
+
   it("it publishes the contract under the correct address", async () => {
     const accountModule = await aptos.getAccountModule({
       accountAddress: objectAddress,
