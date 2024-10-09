@@ -1,7 +1,7 @@
 import { WorkspaceUserConfig } from "@aptos-labs/workspace";
 
 const config: WorkspaceUserConfig = {
-  contractDir: "move",
+  contractDir: "contract",
 };
 
 export default config;

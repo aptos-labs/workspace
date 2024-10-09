@@ -5,11 +5,6 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "move:init": "node ./scripts/init",
-    "move:test": "node ./scripts/move/test",
-    "move:compile": "node ./scripts/move/compile",
-    "move:publish": "node ./scripts/move/publish",
-    "move:upgrade": "node ./scripts/move/upgrade",
     "dev": "ts-node index.ts",
     "test": "npx aptos-workspace test",
     "test:ci": "npx aptos-workspace test --timeout 300000",
