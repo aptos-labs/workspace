@@ -9,25 +9,25 @@ import { addNewListTransaction } from "../entry-functions/addNewList";
 import { addNewTaskTransaction } from "../entry-functions/addNewTask";
 import { completeTaskTransaction } from "../entry-functions/completeTask";
 
-let publisherAccount: Ed25519Account;
 let todoListCreator: Ed25519Account;
+let objectAddress: string;
 
 describe("todoList", (aptos) => {
-  before(function (done) {
-    (async () => {
-      publisherAccount = await generateTestAccount();
-      await publishPackage({
-        publisher: publisherAccount,
-        namedAddresses: {
-          module_addr: publisherAccount.accountAddress.toString(),
-        },
-      });
-    })().then(done);
+  before(async function () {
+    const publisherAccount = await generateTestAccount();
+    const { packageObjectAddress } = await publishPackage({
+      publisher: publisherAccount,
+      addressName: "module_addr",
+      namedAddresses: {
+        module_addr: publisherAccount.accountAddress,
+      },
+    });
+    objectAddress = packageObjectAddress;
   });
 
   it("it publishes the contract under the correct address", async () => {
     const accountModule = await aptos.getAccountModule({
-      accountAddress: publisherAccount.accountAddress,
+      accountAddress: objectAddress,
       moduleName: "todolist",
     });
     expect(accountModule).to.not.undefined;
@@ -35,9 +35,7 @@ describe("todoList", (aptos) => {
 
   it("it creates a new list", async () => {
     todoListCreator = await generateTestAccount();
-    const addNewListTxn = await addNewListTransaction(
-      publisherAccount.accountAddress.toString()
-    );
+    const addNewListTxn = await addNewListTransaction(objectAddress);
 
     const transaction = await aptos.transaction.build.simple({
       sender: todoListCreator.accountAddress,
@@ -57,7 +55,7 @@ describe("todoList", (aptos) => {
 
     const todoListResource = await aptos.getAccountResource({
       accountAddress: todoListCreator.accountAddress,
-      resourceType: `${publisherAccount.accountAddress.toString()}::todolist::TodoList`,
+      resourceType: `${objectAddress}::todolist::TodoList`,
     });
 
     expect(todoListResource).to.not.undefined;
@@ -66,7 +64,7 @@ describe("todoList", (aptos) => {
   it("it creates a new task", async () => {
     const addNewListTxn = await addNewTaskTransaction(
       "test task",
-      publisherAccount.accountAddress.toString()
+      objectAddress
     );
 
     const transaction = await aptos.transaction.build.simple({
@@ -87,10 +85,7 @@ describe("todoList", (aptos) => {
   });
 
   it("it marks task as completed", async () => {
-    const addNewListTxn = await completeTaskTransaction(
-      "1",
-      publisherAccount.accountAddress.toString()
-    );
+    const addNewListTxn = await completeTaskTransaction("1", objectAddress);
 
     const transaction = await aptos.transaction.build.simple({
       sender: todoListCreator.accountAddress,
