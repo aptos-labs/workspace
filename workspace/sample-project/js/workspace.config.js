@@ -1,3 +1,3 @@
 module.exports = {
-  contractDir: "move",
+  contractDir: "contract",
 };
