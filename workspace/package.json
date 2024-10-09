@@ -21,6 +21,7 @@
     "sample-project/"
   ],
   "dependencies": {
+    "@thalalabs/surf": "^1.7.3",
     "commander": "^12.1.0",
     "find-up": "^2.1.0",
     "fs-extra": "^7.0.1",

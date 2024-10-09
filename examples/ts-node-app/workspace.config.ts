@@ -1,4 +1,4 @@
-import { WorkspaceUserConfig } from "@aptos-labs/aptos-workspace";
+import { WorkspaceUserConfig } from "@aptos-labs/workspace";
 
 const config: WorkspaceUserConfig = {
   contractDir: "move",

@@ -1,16 +1,10 @@
-import {
-  Account,
-  AccountAddressInput,
-  Aptos,
-  AptosConfig,
-  Network,
-} from "@aptos-labs/ts-sdk";
+import { Account, AccountAddressInput, Aptos } from "@aptos-labs/ts-sdk";
 import { publishPackageTask } from "../tasks/publish";
 import { compilePackageTask } from "../tasks/compile";
 import { describe as MochaDescribe } from "mocha";
+import { getAptosClient } from "../utils/consts";
 
-const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-const aptos = new Aptos(aptosConfig);
+const aptos = getAptosClient();
 
 /**
  * API endpoint to create a test account
@@ -32,8 +26,8 @@ export const publishPackage = async (args: {
   namedAddresses: Record<string, AccountAddressInput>;
 }) => {
   const { publisher, namedAddresses } = args;
-  await compilePackageTask(namedAddresses);
-  await publishPackageTask({ aptos, publisher });
+  await compilePackageTask({ namedAddresses });
+  await publishPackageTask({ publisher });
 };
 
 /**
