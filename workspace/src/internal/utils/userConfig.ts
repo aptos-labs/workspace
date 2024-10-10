@@ -1,5 +1,6 @@
 import findup from "find-up";
 import { WORKSPACE_CONFIG_FILE_NOT_FOUND } from "../../internal/utils/errors";
+import { isTSProject, loadTsNode } from "./typescript-support";
 
 const JS_CONFIG_FILENAME = "workspace.config.js";
 const CJS_CONFIG_FILENAME = "workspace.config.cjs";
@@ -32,6 +33,10 @@ export function getUserConfigPath() {
  */
 export const getUserConfigContractDir = () => {
   const userWorkspaceConfigPath = getUserConfigPath();
+  // check if user's project is a ts project, if so load ts-node
+  if (isTSProject()) {
+    loadTsNode();
+  }
   const imported = require(userWorkspaceConfigPath);
   const configContent =
     imported.default !== undefined ? imported.default : imported;
