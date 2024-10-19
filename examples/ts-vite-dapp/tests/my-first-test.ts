@@ -1,9 +1,8 @@
 import { expect } from "chai";
-import { generateTestAccount, publishPackage, describe } from "@aptos-labs/workspace";
-
+import { generateTestAccount, publishPackage, workspace } from "@aptos-labs/workspace";
 let objectAddress: string;
 
-describe("my first test", (aptos) => {
+describe("my first test", () => {
   before(async function () {
     const publisherAccount = await generateTestAccount();
     // publish the package, getting back the package pbject address
@@ -19,9 +18,11 @@ describe("my first test", (aptos) => {
   });
 
   it("it publishes the contract under the correct address", async () => {
-    const accountModule = await aptos.getAccountModules({
+    // get the object account modules
+    const accountModule = await workspace.aptos.getAccountModules({
       accountAddress: objectAddress,
     });
+    // expect the account modules to have at least one module
     expect(accountModule).to.have.length.at.least(1);
   });
 });

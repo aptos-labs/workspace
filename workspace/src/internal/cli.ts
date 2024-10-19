@@ -1,12 +1,7 @@
 import { program } from "commander";
 import prompts from "prompts";
 
-import { test, init } from "../tasks";
-import { genAbi } from "../tasks/gen-abi";
-
-export type PromptResult = {
-  language: "ts" | "js";
-};
+import { test, init, genAbi } from "../tasks";
 
 program
   .command("init")
@@ -66,19 +61,3 @@ program
   });
 
 program.parse();
-
-function buildAddressObject(
-  input: string,
-  address: string
-): Record<string, string> {
-  // Split the input string by commas to get the names
-  const names = input.split(",");
-
-  // Build the object by mapping each name to the given address
-  const result: Record<string, string> = {};
-  names.forEach((name) => {
-    result[name] = address;
-  });
-
-  return result;
-}
