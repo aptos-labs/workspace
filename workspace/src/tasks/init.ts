@@ -1,5 +1,8 @@
-import { PromptResult } from "../internal/cli";
 import { generateSampleProject } from "../internal/utils/generateSampleProject";
+
+export type PromptResult = {
+  language: "ts" | "js";
+};
 
 export const init = async (result: PromptResult) => {
   await generateSampleProject(result.language);

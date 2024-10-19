@@ -6,18 +6,12 @@ import {
   isUserProjectTsConfigFileExists,
   isUserProjectTestsFolderExists,
 } from "../internal/utils/source-files";
-import { mochaGlobalSetup, mochaGlobalTeardown } from "../internal/fixtures";
 import { MochaOptions } from "mocha";
 import { isTSProject } from "../internal/utils/typescript-support";
 
 export type TestOptionsArguments = {
   timeout: string;
   grep: string;
-};
-
-export type CustomMochaOptions = MochaOptions & {
-  globalSetup: [() => {}];
-  globalTeardown: [() => {}];
 };
 
 export const test = async (options: TestOptionsArguments) => {
@@ -27,11 +21,9 @@ export const test = async (options: TestOptionsArguments) => {
 
   const { default: Mocha } = await import("mocha");
 
-  const mochaConfig: CustomMochaOptions = {
+  const mochaConfig: MochaOptions = {
     timeout: options.timeout ?? 20000, // to support local testnet run, TODO improve performance
-    require: [],
-    globalSetup: [mochaGlobalSetup], // fixture to run before all tests only once
-    globalTeardown: [mochaGlobalTeardown], // fixture to run after all tests only once
+    require: [path.join(__dirname, "internal/rootHook.js")],
     parallel: true,
     grep: "",
   };

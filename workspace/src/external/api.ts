@@ -2,27 +2,23 @@ import {
   Account,
   AccountAddressInput,
   Aptos,
-  AptosConfig,
   Ed25519Account,
-  Network,
 } from "@aptos-labs/ts-sdk";
 import { publishPackageTask } from "../tasks/publish";
-import { describe as MochaDescribe } from "mocha";
-
-const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-const aptos = new Aptos(aptosConfig);
+import { workspace } from "./workspaceGlobal";
 
 /**
  * API endpoint to create a test account
  */
-export const generateTestAccount = async () => {
+export async function generateTestAccount() {
   const account = Account.generate();
-  await aptos.fundAccount({
+  await workspace.aptos.fundAccount({
     accountAddress: account.accountAddress,
     amount: 1_000_000_000,
+    options: { waitForIndexer: false },
   });
   return account;
-};
+}
 
 /**
  * Publish a package to the Aptos blockchain
@@ -44,21 +40,4 @@ export const publishPackage = async (args: {
     addressName,
   });
   return { packageObjectAddress };
-};
-
-/**
- * A `describe` block runner to be used in tests with an injected `aptos` client
- *
- * @param description The decribe block description
- * @param block A callback function to run
- */
-export const describe = (
-  description: string,
-  block: (aptos: Aptos) => void
-) => {
-  // Call the original mocha describe with the modified block
-  MochaDescribe(description, () => {
-    // Execute the original test block
-    block(aptos);
-  });
 };

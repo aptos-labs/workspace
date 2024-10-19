@@ -2,7 +2,7 @@ import { expect } from "chai";
 import {
   generateTestAccount,
   publishPackage,
-  describe,
+  workspace,
 } from "@aptos-labs/workspace";
 import { createSurfClient } from "@thalalabs/surf";
 import { Ed25519Account } from "@aptos-labs/ts-sdk";
@@ -12,7 +12,7 @@ let todoListCreator: Ed25519Account;
 let objectAddress: string;
 let surfClient: any;
 
-describe("todoListWithSurf", (aptos) => {
+describe("todoListWithSurf", () => {
   before(async function () {
     const publisherAccount = await generateTestAccount();
     const { packageObjectAddress } = await publishPackage({
@@ -23,7 +23,10 @@ describe("todoListWithSurf", (aptos) => {
       },
     });
     objectAddress = packageObjectAddress;
-    surfClient = createSurfClient(aptos).useABI(TODOLIST_ABI, objectAddress);
+    surfClient = createSurfClient(workspace.aptos).useABI(
+      TODOLIST_ABI,
+      objectAddress
+    );
   });
 
   it("it creates a new list", async () => {
@@ -36,7 +39,7 @@ describe("todoListWithSurf", (aptos) => {
 
     expect(committedTransactionResponse.success).true;
 
-    const todoListResource = await aptos.getAccountResource({
+    const todoListResource = await workspace.aptos.getAccountResource({
       accountAddress: todoListCreator.accountAddress,
       resourceType: `${objectAddress}::todolist::TodoList`,
     });

@@ -3,7 +3,7 @@ import { getUserConfigContractDir } from "../internal/utils/userConfig";
 import { AccountAddress, AccountAddressInput } from "@aptos-labs/ts-sdk";
 
 export const moveUnitTestTask = async (
-  namedAddresses: Record<string, AccountAddressInput> // TODO read it from workspace config file
+  namedAddresses: Record<string, AccountAddressInput>
 ) => {
   // transform AccountAddressInput to AccountAddress type
   const transformedAddresses: Record<string, AccountAddress> = {};
