@@ -31,7 +31,7 @@
     "tsconfig-paths": "^4.2.0"
   },
   "peerDependencies": {
-    "@aptos-labs/ts-sdk": ">=1.29.1",
+    "@aptos-labs/ts-sdk": ">=1.30.0",
     "@types/chai": "^4.2.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "^20.14.11",
@@ -45,7 +45,7 @@
     }
   },
   "devDependencies": {
-    "@aptos-labs/ts-sdk": "^1.29.1",
+    "@aptos-labs/ts-sdk": "^1.30.0",
     "@types/chai": "^4.2.0",
     "@types/find-up": "^2.1.1",
     "@types/fs-extra": "^5.1.0",
