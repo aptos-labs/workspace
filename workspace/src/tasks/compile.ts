@@ -1,6 +1,9 @@
 import { AccountAddressInput, AccountAddress } from "@aptos-labs/ts-sdk";
 import { Move } from "@aptos-labs/ts-sdk/dist/common/cli/index.js";
-import { getUserConfigContractDir } from "../internal/utils/userConfig";
+import {
+  getUserConfigContractDir,
+  getUserConfigVerbose,
+} from "../internal/utils/userConfig";
 
 export const compilePackageTask = async (
   namedAddresses: Record<string, AccountAddressInput>
@@ -15,11 +18,13 @@ export const compilePackageTask = async (
   }
   // get the configured contract dir
   const contractDir = getUserConfigContractDir();
+  const configVerbose = getUserConfigVerbose();
 
   await new Move().buildPublishPayload({
     outputFile: `${contractDir}/test-package.json`,
     packageDirectoryPath: contractDir,
     namedAddresses: transformedAddresses,
     extraArguments: ["--assume-yes", "--skip-fetch-latest-git-deps"],
+    showStdout: configVerbose ?? false,
   });
 };

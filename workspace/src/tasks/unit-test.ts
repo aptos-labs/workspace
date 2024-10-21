@@ -20,5 +20,6 @@ export const moveUnitTestTask = async () => {
   await new Move().test({
     packageDirectoryPath: contractDir,
     namedAddresses,
+    showStdout: false,
   });
 };

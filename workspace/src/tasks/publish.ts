@@ -4,7 +4,10 @@ import {
   AccountAddressInput,
 } from "@aptos-labs/ts-sdk";
 import { Move } from "@aptos-labs/ts-sdk/dist/common/cli/index.js";
-import { getUserConfigContractDir } from "../internal/utils/userConfig";
+import {
+  getUserConfigContractDir,
+  getUserConfigVerbose,
+} from "../internal/utils/userConfig";
 import { workspace } from "../external/workspaceGlobal";
 
 /**
@@ -29,6 +32,7 @@ export const publishPackageTask = async (args: {
 
   // get the configured contract dir
   const contractDir = getUserConfigContractDir();
+  const configVerbose = getUserConfigVerbose();
 
   const response = await new Move().createObjectAndPublishPackage({
     packageDirectoryPath: contractDir,
@@ -39,6 +43,7 @@ export const publishPackageTask = async (args: {
       `--private-key=${publisher.privateKey}`,
       `--url=${workspace.aptos.config.fullnode}`,
     ],
+    showStdout: configVerbose ?? false,
   });
   return response.objectAddress;
 };

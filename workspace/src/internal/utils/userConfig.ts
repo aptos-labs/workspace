@@ -43,3 +43,19 @@ export const getUserConfigContractDir = () => {
 
   return configContent.contractDir;
 };
+
+/**
+ * Returns the user `verbose` property value from the workspace.config.* file
+ */
+export const getUserConfigVerbose = () => {
+  const userWorkspaceConfigPath = getUserConfigPath();
+  // check if user's project is a ts project, if so load ts-node
+  if (isTSProject()) {
+    loadTsNode();
+  }
+  const imported = require(userWorkspaceConfigPath);
+  const configContent =
+    imported.default !== undefined ? imported.default : imported;
+
+  return configContent.verbose;
+};

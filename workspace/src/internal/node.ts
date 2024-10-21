@@ -3,6 +3,7 @@ import kill from "tree-kill";
 import * as readline from "readline";
 import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
 import { NodeInfo } from "./utils/types";
+import { getUserConfigVerbose } from "./utils/userConfig";
 
 async function sleep(timeMs: number): Promise<null> {
   return new Promise((resolve) => {
@@ -28,6 +29,8 @@ export class TestNode {
   public static async spawn(): Promise<TestNode> {
     const id = generateRandomId(4);
 
+    const configVerbose = getUserConfigVerbose();
+
     const cliCommand = "aptos-workspace-server";
     const cliArgs: string[] = [];
 
@@ -50,7 +53,9 @@ export class TestNode {
       }, this.TIMEOUT_SECONDS * 1000); // 30 seconds timeout
 
       rl.on("line", (line: string) => {
-        console.log(`[NODE ${id}] ${line}`);
+        if (configVerbose) {
+          console.log(`[NODE ${id}] ${line}`);
+        }
 
         const pattern =
           /Node API is ready. Endpoint:.+:(\d+)|Faucet is ready. Endpoint:.+:(\d+)|Indexer API is ready. Endpoint:.+:(\d+)/g;
