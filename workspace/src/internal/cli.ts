@@ -2,6 +2,7 @@ import { program } from "commander";
 import prompts from "prompts";
 
 import { test, init, genAbi } from "../tasks";
+import { moveUnitTestTask } from "../tasks/unit-test";
 
 program
   .command("init")
@@ -22,6 +23,13 @@ program
       },
     ]);
     await init(result);
+  });
+
+program
+  .command("move-unit-test")
+  .description("Run Move unit tests")
+  .action(async () => {
+    await moveUnitTestTask();
   });
 
 program
@@ -47,7 +55,7 @@ program
 
 program
   .command("test")
-  .description("Run unit tests")
+  .description("Run integration tests")
   .option(
     "-t, --timeout <treshold>",
     "Specify test timeout threshold (in milliseconds) "
