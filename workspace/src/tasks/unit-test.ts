@@ -1,23 +1,24 @@
 import { Move } from "@aptos-labs/ts-sdk/dist/common/cli/index.js";
+import fs from "fs";
+import toml from "toml";
 import { getUserConfigContractDir } from "../internal/utils/userConfig";
-import { AccountAddress, AccountAddressInput } from "@aptos-labs/ts-sdk";
 
-export const moveUnitTestTask = async (
-  namedAddresses: Record<string, AccountAddressInput>
-) => {
-  // transform AccountAddressInput to AccountAddress type
-  const transformedAddresses: Record<string, AccountAddress> = {};
-
-  for (const key in namedAddresses) {
-    if (namedAddresses.hasOwnProperty(key)) {
-      transformedAddresses[key] = AccountAddress.from(namedAddresses[key]);
-    }
-  }
+export const moveUnitTestTask = async () => {
   // get the configured contract dir
   const contractDir = getUserConfigContractDir();
+  // read the Move.toml file
+  var str = fs.readFileSync(contractDir + "/Move.toml", "utf-8");
+  // parse the Move.toml file and extract the named addresses
+  const namedAddresses = toml.parse(str).addresses;
+
+  // generate random addresses for the named addresses
+  Object.keys(namedAddresses).forEach((key) => {
+    let hex = Math.floor(Math.random() * 0xfff + 0x100).toString(16);
+    namedAddresses[key] = `0x${hex}`; // You can assign any value you want here
+  });
 
   await new Move().test({
     packageDirectoryPath: contractDir,
-    namedAddresses: transformedAddresses,
+    namedAddresses,
   });
 };
