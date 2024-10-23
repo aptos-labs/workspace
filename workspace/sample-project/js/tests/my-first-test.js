@@ -1,20 +1,16 @@
 const expect = require("chai").expect;
-const {
-  generateTestAccount,
-  publishPackage,
-  workspace,
-} = require("@aptos-labs/workspace");
+const { publishPackage, workspace } = require("@aptos-labs/workspace");
 
 let objectAddress;
 
 describe("my first test", () => {
   before(async function () {
-    const publisherAccount = await generateTestAccount();
+    const [signer1] = await getSigners();
     const { packageObjectAddress } = await publishPackage({
-      publisher: publisherAccount,
+      publisher: signer1,
       addressName: "module_addr",
       namedAddresses: {
-        module_addr: publisherAccount.accountAddress,
+        module_addr: signer1.accountAddress,
       },
     });
     objectAddress = packageObjectAddress;

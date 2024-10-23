@@ -1,9 +1,5 @@
 const expect = require("chai").expect;
-const {
-  generateTestAccount,
-  publishPackage,
-  describe,
-} = require("@aptos-labs/workspace");
+const { publishPackage, describe } = require("@aptos-labs/workspace");
 const { addNewListTransaction } = require("../entry-functions/addNewList");
 const { addNewTaskTransaction } = require("../entry-functions/addNewTask");
 const { completeTaskTransaction } = require("../entry-functions/completeTask");
@@ -13,12 +9,12 @@ let todoListCreator;
 
 describe("todoList", (aptos) => {
   before(async function () {
-    const publisherAccount = await generateTestAccount();
+    const [signer1] = await getSigners();
     const { packageObjectAddress } = await publishPackage({
-      publisher: publisherAccount,
+      publisher: signer1,
       addressName: "module_addr",
       namedAddresses: {
-        module_addr: publisherAccount.accountAddress,
+        module_addr: signer1.accountAddress,
       },
     });
     objectAddress = packageObjectAddress;
@@ -33,7 +29,7 @@ describe("todoList", (aptos) => {
   });
 
   it("it creates a new list", async () => {
-    todoListCreator = await generateTestAccount();
+    [todoListCreator] = await getSigners();
     const addNewListTxn = await addNewListTransaction(objectAddress);
 
     const transaction = await aptos.transaction.build.simple({

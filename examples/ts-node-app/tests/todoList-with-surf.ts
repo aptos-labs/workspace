@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import {
   generateTestAccount,
+  getSigners,
   publishPackage,
   workspace,
 } from "@aptos-labs/workspace";
@@ -14,12 +15,12 @@ let surfClient: any;
 
 describe("todoListWithSurf", () => {
   before(async function () {
-    const publisherAccount = await generateTestAccount();
+    const [signer1] = await getSigners();
     const { packageObjectAddress } = await publishPackage({
-      publisher: publisherAccount,
+      publisher: signer1,
       addressName: "module_addr",
       namedAddresses: {
-        module_addr: publisherAccount.accountAddress,
+        module_addr: signer1.accountAddress,
       },
     });
     objectAddress = packageObjectAddress;
