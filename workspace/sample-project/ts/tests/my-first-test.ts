@@ -1,21 +1,17 @@
 import { expect } from "chai";
-import {
-  generateTestAccount,
-  publishPackage,
-  workspace,
-} from "@aptos-labs/workspace";
+import { publishPackage, workspace } from "@aptos-labs/workspace";
 
 let objectAddress: string;
 
 describe("my first test", () => {
   before(async function () {
-    const publisherAccount = await generateTestAccount();
+    const [signer1] = await getSigners();
     // publish the package, getting back the package pbject address
     const { packageObjectAddress } = await publishPackage({
-      publisher: publisherAccount,
+      publisher: signer1,
       addressName: "module_addr",
       namedAddresses: {
-        module_addr: publisherAccount.accountAddress,
+        module_addr: signer1.accountAddress,
       },
     });
     // set the object address to the package object address

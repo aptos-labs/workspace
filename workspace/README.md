@@ -77,17 +77,17 @@ import {
   Ed25519Account,
 } from "@aptos-labs/ts-sdk";
 
-let publisherAccount: Ed25519Account;
+let signer1: Ed25519Account;
 
 describe("my first test", () => {
   // Optional `before` block to publish a Move package before running tests
   before(function (done) {
     (async () => {
-      publisherAccount = await generateTestAccount();
+      signer1 = await generateTestAccount();
       await publishPackage({
-        publisher: publisherAccount,
+        publisher: signer1,
         namedAddresses: {
-          module_addr: publisherAccount.accountAddress.toString(),
+          module_addr: signer1.accountAddress.toString(),
         },
       });
     })().then(done);
@@ -102,7 +102,7 @@ import { expect } from "chai";
 
 it("it publishes the contract under the correct address", async () => {
   const accountModules = await aptos.getAccountModules({
-    accountAddress: publisherAccount.accountAddress,
+    accountAddress: signer1.accountAddress,
   });
   expect(accountModule).to.have.length.at.least(1);
 });

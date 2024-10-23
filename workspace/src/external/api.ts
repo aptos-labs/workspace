@@ -8,7 +8,7 @@ import { publishPackageTask } from "../tasks/publish";
 import { workspace } from "./workspaceGlobal";
 
 /**
- * API endpoint to create a test account
+ * API endpoint to create a test Ed25519Account account
  */
 export async function generateTestAccount() {
   const account = Account.generate();
@@ -18,6 +18,21 @@ export async function generateTestAccount() {
     options: { waitForIndexer: false },
   });
   return account;
+}
+
+/**
+ * API endpoint to create and get Ed25519Account signers
+ * @param amount - [optional] The number of signers to create. Set to 1 by default
+ * @returns An array of signers
+ */
+export async function getSigners(
+  amount: number = 1
+): Promise<Ed25519Account[]> {
+  const signersPromises: Promise<Ed25519Account>[] = [];
+  for (let i = 0; i < amount; i++) {
+    signersPromises.push(generateTestAccount());
+  }
+  return await Promise.all(signersPromises);
 }
 
 /**

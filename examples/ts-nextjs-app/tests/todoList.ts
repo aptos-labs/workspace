@@ -1,9 +1,5 @@
 import { expect } from "chai";
-import {
-  generateTestAccount,
-  publishPackage,
-  workspace,
-} from "@aptos-labs/workspace";
+import { getSigners, publishPackage, workspace } from "@aptos-labs/workspace";
 import { Ed25519Account } from "@aptos-labs/ts-sdk";
 import { addNewListTransaction } from "@/entry-functions/addNewList";
 import { addNewTaskTransaction } from "@/entry-functions/addNewTask";
@@ -14,12 +10,12 @@ let objectAddress: string;
 
 describe("todoList", () => {
   before(async function () {
-    const publisherAccount = await generateTestAccount();
+    const [signer1] = await getSigners();
     const { packageObjectAddress } = await publishPackage({
-      publisher: publisherAccount,
+      publisher: signer1,
       addressName: "module_addr",
       namedAddresses: {
-        module_addr: publisherAccount.accountAddress,
+        module_addr: signer1.accountAddress,
       },
     });
     objectAddress = packageObjectAddress;
@@ -34,7 +30,7 @@ describe("todoList", () => {
   });
 
   it("it creates a new list", async () => {
-    todoListCreator = await generateTestAccount();
+    [todoListCreator] = await getSigners();
     const addNewListTxn = await addNewListTransaction(objectAddress);
 
     const transaction = await workspace.aptos.transaction.build.simple({
