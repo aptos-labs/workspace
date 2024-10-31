@@ -5,7 +5,7 @@ let objectAddress: string;
 
 describe("my first test", () => {
   before(async function () {
-    const [signer1] = await getSigners();
+    const [signer1] = await getTestSigners();
     // publish the package, getting back the package pbject address
     const { packageObjectAddress } = await publishPackage({
       publisher: signer1,
