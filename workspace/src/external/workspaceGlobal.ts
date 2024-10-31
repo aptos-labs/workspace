@@ -11,7 +11,7 @@ export interface WorkspaceGlobal extends NodeJS.Global {
 declare var global: WorkspaceGlobal;
 
 /**
- * A global variable to access the current client thread.
+ * A global object to access the current client thread.
  * Each test runs a `root hook` thread that spins up a new Aptos client.
  * See `rootHook.ts` for more details.
  */

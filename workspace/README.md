@@ -6,7 +6,7 @@ Aptos Workspace is an integrated development environment designed to make innova
 
 ## Overview
 
-Currently, Aptos Workspace serves as a testing environment that provides a framework for Aptos developers to easily run integration tests for their dApps.
+Aptos Workspace provides a testing environment framework for Aptos developers to easily run integration tests for their dApps.
 
 Aptos Workspace utilizes [mocha](https://mochajs.org/) as the testing framework and [chai](https://www.chaijs.com/) as the assertion framework.
 
@@ -16,7 +16,9 @@ Aptos Workspace utilizes [mocha](https://mochajs.org/) as the testing framework 
 npm install --save-dev @aptos-labs/workspace
 ```
 
-Aptos Workspace supports only `.ts` test files and uses `TypeScript` and `ts-node` under the hood, so make sure you installed the relevant packages.
+#### Using Typescript?
+
+Make sure you installed the relevant packages.
 
 ```bash
 npm install --save-dev ts-node typescript
@@ -28,7 +30,7 @@ To be able to write your tests in TypeScript, you also need these packages:
 npm install --save-dev chai@4 @types/chai@4 @types/mocha tree-kill
 ```
 
-### Using pnpm or yarn?
+#### Using pnpm or yarn?
 
 If your project uses `pnpm` or `yarn`, you'll also need this package due to the specific behavior of these package managers. Read more about it [here](https://github.com/aptos-labs/workspace/pull/6)
 
@@ -44,67 +46,74 @@ To get started with Aptos Workspace, open your terminal, cd into your dapp dir
 npx aptos-workspace init
 ```
 
-The command will initialize your testing environment by:
+The prompt will ask you to choose the language you want to use - `TypeScript` or `JavaScript`.
 
-1. Creating a `tests` folder with a `my-first-test.ts` example file (this step will be skipped if the folder already exists).
-2. Creating a `tsconfig.testing.json` file to be used within Workspace (this step will be skipped if the file already exists).
+Then, Workspace will initialize your testing environment by:
+
+1. Creating a `workspace.config` file to be used in your project.
+2. Creating a `tests` folder with a `my-first-test` example file (this step will be skipped if the folder already exists).
+3. For TypeScript projects, creating a `tsconfig.testing.json` file to be used within Workspace (this step will be skipped if the file already exists).
 
 ## Write tests
 
-If you have initialized Workspace for the first time, feel free to check out the generated test file `my-first-test.ts`. Here's a general overview of how you will write a test:
+If you have initialized Workspace for the first time, feel free to check out the generated test file `my-first-test`.
 
-1. Initialize an `Aptos` client instance configured to use the LOCAL network
+Here's a general overview of how you will write a test:
 
-```ts
-import { AptosConfig, Network, Aptos } from "@aptos-labs/ts-sdk";
+1. Define a `describe` block for your test suite.
+2. Import `expect` from `chai` to write your assertions.
+3. Write your tests inside the `describe` block.
 
-const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-const aptos = new Aptos(aptosConfig);
-```
-
-2. Define a `describe` block for your test suite.
-
-If you need to publish a Move package to run your test, you can add a `before` hook to generate a testing account and publish the Move package to the Aptos network.
-
-> **_NOTE:_** Workspace looks for a `move` directory in the root folder that contains the Move modules. Make sure this directory exists
-
-```ts
-import { generateTestAccount, publishPackage } from "@aptos-labs/workspace";
-import {
-  AptosConfig,
-  Network,
-  Aptos,
-  Ed25519Account,
-} from "@aptos-labs/ts-sdk";
-
-let signer1: Ed25519Account;
+```javascript
+import { expect } from "chai";
 
 describe("my first test", () => {
-  // Optional `before` block to publish a Move package before running tests
-  before(function (done) {
-    (async () => {
-      signer1 = await generateTestAccount();
-      await publishPackage({
-        publisher: signer1,
-        namedAddresses: {
-          module_addr: signer1.accountAddress.toString(),
-        },
-      });
-    })().then(done);
+  it("tests something", async () => {
+    expect(1 + 1).toEqual(2);
   });
 });
 ```
 
-3. Write your test. In the `it` block, fetch the `publisher` account's modules and use `expect` to verify that at least one module is published to the Aptos network.
+## Workspace API
 
-```ts
-import { expect } from "chai";
+Workspace provides a set of API variables and functions to interact with the Workspace framework.
 
-it("it publishes the contract under the correct address", async () => {
-  const accountModules = await aptos.getAccountModules({
-    accountAddress: signer1.accountAddress,
-  });
-  expect(accountModule).to.have.length.at.least(1);
+### `workspace` object
+
+A workspace object to access the current client thread.
+
+```typescript
+import { workspace } from "@aptos-labs/workspace";
+
+await workspace.aptos.getAccountModules({
+  accountAddress: objectAddress,
+});
+```
+
+### `getTestSigners()`
+
+A function to generate a set of Aptos Ed25519Account test signers.
+
+```typescript
+import { getTestSigners } from "@aptos-labs/workspace";
+
+const [signer1] = await getTestSigners();
+const [signer1, signer2, signer3] = await getTestSigners(3);
+```
+
+### `publishPackage()`
+
+A function to publish a Move package to the Workspace test node.
+
+```typescript
+import { publishPackage, getTestSigners } from "@aptos-labs/workspace";
+
+const [signer1] = await getTestSigners();
+const { packageObjectAddress } = await publishPackage({
+  publisher: signer1,
+  namedAddresses: {
+    module_addr: signer1.accountAddress,
+  },
 });
 ```
 
@@ -114,4 +123,42 @@ To run your tests with Aptos Workspace, open your terminal, cd into your dapp 
 
 ```bash
 npx aptos-workspace test
+```
+
+We recommend to add a `npm script` to your `package.json` to make it easier to run your tests.
+
+```json
+"scripts": {
+  "test": "npx aptos-workspace test"
+}
+```
+
+Then you can simply run `npm test` to run your tests.
+
+## `workspace.config` file
+
+The `workspace.config` file is used to configure the Workspace framework.
+
+### `contractDir`
+
+The `contractDir` option is used to specify the directory containing your project's Move contracts.
+
+By default, this option is set to `contract`, if your contracts are located in a different directory, you can specify it in the `workspace.config` file.
+
+```typescript
+const config: WorkspaceUserConfig = {
+  contractDir: "contract",
+};
+```
+
+### `verbose`
+
+The `verbose` option is used to specify the verbosity of the Workspace framework.
+
+By default, this option is set to `false`, if you want to see the verbose output, you can set it to `true` in the `workspace.config` file.
+
+```typescript
+const config: WorkspaceUserConfig = {
+  verbose: true,
+};
 ```
