@@ -1,5 +1,9 @@
 const expect = require("chai").expect;
-const { publishPackage, workspace } = require("@aptos-labs/workspace");
+const {
+  getTestSigners,
+  publishPackage,
+  workspace,
+} = require("@aptos-labs/workspace");
 
 let objectAddress;
 

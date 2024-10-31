@@ -1,5 +1,9 @@
 import { expect } from "chai";
-import { publishPackage, workspace } from "@aptos-labs/workspace";
+import {
+  getTestSigners,
+  publishPackage,
+  workspace,
+} from "@aptos-labs/workspace";
 
 let objectAddress;
 
