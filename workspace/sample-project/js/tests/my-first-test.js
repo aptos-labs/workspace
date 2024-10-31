@@ -12,7 +12,6 @@ describe("my first test", () => {
     const [signer1] = await getTestSigners();
     const { packageObjectAddress } = await publishPackage({
       publisher: signer1,
-      addressName: "module_addr",
       namedAddresses: {
         module_addr: signer1.accountAddress,
       },

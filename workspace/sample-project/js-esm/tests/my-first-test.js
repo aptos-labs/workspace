@@ -13,7 +13,6 @@ describe("my first test", () => {
     // publish the package, getting back the package pbject address
     const { packageObjectAddress } = await publishPackage({
       publisher: signer1,
-      addressName: "module_addr",
       namedAddresses: {
         module_addr: signer1.accountAddress,
       },
