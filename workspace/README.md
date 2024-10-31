@@ -183,4 +183,4 @@ npx aptos-workspace gen-abi
 This function will generate the ABI for your contracts and save it in the `abis` directory.
 Then, you can use the `surfClient` in your tests.
 
-Check out the [Surf example](./examples/ts-node-app/tests/todoList-with-surf.ts) for more details.
+Check out the [Surf example](../examples/ts-node-app/tests/todoList-with-surf.ts) for more details.
