@@ -162,3 +162,25 @@ const config: WorkspaceUserConfig = {
   verbose: true,
 };
 ```
+
+## `Surf` support
+
+Workspace supports the [Thala's Surf](https://aptos.dev/en/build/sdks/ts-sdk/type-safe-contract) TypeScript type safety library.
+
+To use Surf with Workspace, you need to install the `@thalalabs/surf` package.
+
+```bash
+npm install --save-dev @thalalabs/surf
+```
+
+Surf uses the contract ABI to infer the types of the contract's functions and events.
+To generate your contract ABI, you can use the `npx aptos-workspace gen-abi` command.
+
+```bash
+npx aptos-workspace gen-abi
+```
+
+This function will generate the ABI for your contracts and save it in the `abis` directory.
+Then, you can use the `surfClient` in your tests.
+
+Check out the [Surf example](./examples/ts-node-app/tests/todoList-with-surf.ts) for more details.
