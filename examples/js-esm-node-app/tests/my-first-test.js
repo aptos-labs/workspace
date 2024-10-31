@@ -1,11 +1,15 @@
 import { expect } from "chai";
-import { publishPackage, workspace } from "@aptos-labs/workspace";
+import {
+  getTestSigners,
+  publishPackage,
+  workspace,
+} from "@aptos-labs/workspace";
 
 let objectAddress;
 
 describe("my first test", () => {
   before(async function () {
-    const [signer1] = await getSigners();
+    const [signer1] = await getTestSigners();
     // publish the package, getting back the package pbject address
     const { packageObjectAddress } = await publishPackage({
       publisher: signer1,

@@ -17,11 +17,10 @@ export const mochaHooks: RootHookObject = {
 };
 
 /**
- * Creates a global Aptos client instance and inject it into the global
- * object, so later devs can use it in their test suites
+ * Spins up a new Aptos node and assigns it to the global `workspace` object.
  */
 const createGlobalAptosClientInstance = async () => {
   workspace.testNode = await TestNode.spawn();
-  // inject aptos instance to the global object
+  // inject aptos instance to the global `workspace` object.
   workspace.aptos = workspace.testNode.client();
 };
