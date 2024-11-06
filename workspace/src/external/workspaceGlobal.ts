@@ -2,8 +2,7 @@ import { Aptos } from "@aptos-labs/ts-sdk";
 import { TestNode } from "../internal/node";
 
 // Declare the global object type
-export interface WorkspaceGlobal extends NodeJS.Global {
-  aptos: Aptos;
+export interface WorkspaceGlobal extends NodeJS.Global, Aptos {
   testNode: TestNode;
 }
 
