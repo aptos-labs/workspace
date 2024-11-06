@@ -23,7 +23,7 @@ describe("todoListWithSurf", () => {
       },
     });
     objectAddress = packageObjectAddress;
-    surfClient = createSurfClient(workspace.aptos).useABI(
+    surfClient = createSurfClient(workspace).useABI(
       TODOLIST_ABI,
       objectAddress
     );
@@ -39,7 +39,7 @@ describe("todoListWithSurf", () => {
 
     expect(committedTransactionResponse.success).true;
 
-    const todoListResource = await workspace.aptos.getAccountResource({
+    const todoListResource = await workspace.getAccountResource({
       accountAddress: todoListCreator.accountAddress,
       resourceType: `${objectAddress}::todolist::TodoList`,
     });

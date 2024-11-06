@@ -24,7 +24,7 @@ describe("todoList", () => {
   });
 
   it("it publishes the contract under the correct address", async () => {
-    const accountModule = await workspace.aptos.getAccountModule({
+    const accountModule = await workspace.getAccountModule({
       accountAddress: objectAddress,
       moduleName: "todolist",
     });
@@ -35,24 +35,23 @@ describe("todoList", () => {
     [todoListCreator] = await getTestSigners();
     const addNewListTxn = await addNewListTransaction(objectAddress);
 
-    const transaction = await workspace.aptos.transaction.build.simple({
+    const transaction = await workspace.transaction.build.simple({
       sender: todoListCreator.accountAddress,
       data: addNewListTxn.data,
     });
 
-    const response = await workspace.aptos.signAndSubmitTransaction({
+    const response = await workspace.signAndSubmitTransaction({
       signer: todoListCreator,
       transaction,
     });
 
-    const committedTransactionResponse =
-      await workspace.aptos.waitForTransaction({
-        transactionHash: response.hash,
-      });
+    const committedTransactionResponse = await workspace.waitForTransaction({
+      transactionHash: response.hash,
+    });
 
     expect(committedTransactionResponse.success).true;
 
-    const todoListResource = await workspace.aptos.getAccountResource({
+    const todoListResource = await workspace.getAccountResource({
       accountAddress: todoListCreator.accountAddress,
       resourceType: `${objectAddress}::todolist::TodoList`,
     });
@@ -66,20 +65,19 @@ describe("todoList", () => {
       objectAddress
     );
 
-    const transaction = await workspace.aptos.transaction.build.simple({
+    const transaction = await workspace.transaction.build.simple({
       sender: todoListCreator.accountAddress,
       data: addNewListTxn.data,
     });
 
-    const response = await workspace.aptos.signAndSubmitTransaction({
+    const response = await workspace.signAndSubmitTransaction({
       signer: todoListCreator,
       transaction,
     });
 
-    const committedTransactionResponse =
-      await workspace.aptos.waitForTransaction({
-        transactionHash: response.hash,
-      });
+    const committedTransactionResponse = await workspace.waitForTransaction({
+      transactionHash: response.hash,
+    });
 
     expect(committedTransactionResponse.success).true;
   });
@@ -87,20 +85,19 @@ describe("todoList", () => {
   it("it marks task as completed", async () => {
     const addNewListTxn = await completeTaskTransaction("1", objectAddress);
 
-    const transaction = await workspace.aptos.transaction.build.simple({
+    const transaction = await workspace.transaction.build.simple({
       sender: todoListCreator.accountAddress,
       data: addNewListTxn.data,
     });
 
-    const response = await workspace.aptos.signAndSubmitTransaction({
+    const response = await workspace.signAndSubmitTransaction({
       signer: todoListCreator,
       transaction,
     });
 
-    const committedTransactionResponse =
-      await workspace.aptos.waitForTransaction({
-        transactionHash: response.hash,
-      });
+    const committedTransactionResponse = await workspace.waitForTransaction({
+      transactionHash: response.hash,
+    });
 
     expect(committedTransactionResponse.success).true;
   });

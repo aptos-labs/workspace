@@ -23,7 +23,7 @@ describe("my first test", () => {
 
   it("it publishes the contract under the correct address", async () => {
     // get the object account modules
-    const accountModule = await workspace.aptos.getAccountModules({
+    const accountModule = await workspace.getAccountModules({
       accountAddress: objectAddress,
     });
     // expect the account modules to have at least one module

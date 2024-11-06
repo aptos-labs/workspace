@@ -85,7 +85,7 @@ A workspace object to access the current client thread.
 ```typescript
 import { workspace } from "@aptos-labs/workspace";
 
-await workspace.aptos.getAccountModules({
+await workspace.getAccountModules({
   accountAddress: objectAddress,
 });
 ```

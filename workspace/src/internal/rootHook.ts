@@ -22,5 +22,7 @@ export const mochaHooks: RootHookObject = {
 const createGlobalAptosClientInstance = async () => {
   workspace.testNode = await TestNode.spawn();
   // inject aptos instance to the global `workspace` object.
-  workspace.aptos = workspace.testNode.client();
+
+  // Set up inheritance so workspace has all Aptos methods
+  Object.setPrototypeOf(workspace, workspace.testNode.client());
 };

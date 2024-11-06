@@ -2,7 +2,10 @@ import {
   Account,
   AccountAddressInput,
   Aptos,
+  CommittedTransactionResponse,
   Ed25519Account,
+  InputGenerateTransactionOptions,
+  InputGenerateTransactionPayloadData,
 } from "@aptos-labs/ts-sdk";
 import { publishPackageTask } from "../tasks/publish";
 import { workspace } from "./workspaceGlobal";
@@ -12,7 +15,7 @@ import { workspace } from "./workspaceGlobal";
  */
 export async function generateTestAccount() {
   const account = Account.generate();
-  await workspace.aptos.fundAccount({
+  await workspace.fundAccount({
     accountAddress: account.accountAddress,
     amount: 1_000_000_000,
     options: { waitForIndexer: false },
@@ -58,4 +61,33 @@ export const publishPackage = async (args: {
     addressName: addressName ?? Object.keys(namedAddresses)[0],
   });
   return { packageObjectAddress };
+};
+
+/**
+ * Sign and submit a transaction
+ * @param args.sender - The sender of the transaction
+ * @param args.data - The data of the transaction
+ * @param args.options - The options of the transaction
+ * @returns The committed transaction
+ */
+export const signAndSubmit = async (args: {
+  sender: Ed25519Account;
+  data: InputGenerateTransactionPayloadData;
+  options?: InputGenerateTransactionOptions;
+}): Promise<CommittedTransactionResponse> => {
+  const { sender, data, options } = args;
+  const transaction = await workspace.transaction.build.simple({
+    sender: sender.accountAddress,
+    data,
+    options,
+  });
+
+  const pendingTransaction = await workspace.signAndSubmitTransaction({
+    signer: sender,
+    transaction,
+  });
+  const committedTransaction = await workspace.waitForTransaction({
+    transactionHash: pendingTransaction.hash,
+  });
+  return committedTransaction;
 };

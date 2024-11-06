@@ -20,7 +20,7 @@ describe("my first test", () => {
   });
 
   it("it publishes the contract under the correct address", async () => {
-    const accountModule = await workspace.aptos.getAccountModules({
+    const accountModule = await workspace.getAccountModules({
       accountAddress: objectAddress,
     });
     expect(accountModule).to.have.length.at.least(1);

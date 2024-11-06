@@ -41,7 +41,7 @@ export const publishPackageTask = async (args: {
     extraArguments: [
       "--assume-yes",
       `--private-key=${publisher.privateKey}`,
-      `--url=${workspace.aptos.config.fullnode}`,
+      `--url=${workspace.config.fullnode}`,
     ],
     showStdout: configVerbose ?? false,
   });
