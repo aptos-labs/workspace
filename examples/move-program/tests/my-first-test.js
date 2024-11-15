@@ -9,11 +9,11 @@ let objectAddress;
 
 describe("my first test", () => {
   before(async function () {
-    const [publisher] = await getTestSigners();
+    const [signer1] = await getTestSigners();
     const { packageObjectAddress } = await publishPackage({
-      publisher,
+      publisher: signer1,
       namedAddresses: {
-        message_board_addr: publisher.accountAddress,
+        message_board_addr: signer1.accountAddress,
       },
     });
     objectAddress = packageObjectAddress;
