@@ -1,0 +1,33 @@
+name: Run the move-program tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}-${{ github.workflow }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Install node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build workspace local package
+        run: |
+          cd workspace
+          npm install
+          npm run build
+
+      - name: Run move-program tests
+        run: |
+          cd examples/move-program
+          npm install
+          npm run test:ci

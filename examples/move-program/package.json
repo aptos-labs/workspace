@@ -1,0 +1,17 @@
+{
+  "name": "move-program",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx aptos-workspace test",
+    "test:ci": "npx aptos-workspace test --timeout 300000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@aptos-labs/workspace": "file:../../workspace",
+    "chai": "^4.5.0"
+  }
+}
