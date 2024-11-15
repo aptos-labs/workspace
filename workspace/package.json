@@ -1,11 +1,12 @@
 {
   "name": "@aptos-labs/workspace",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "Apache-2.0",
   "bin": {
     "aptos-workspace": "./dist/internal/cli.js",
     "aw": "./dist/internal/cli.js"
   },
+  "repository": "https://github.com/aptos-labs/workspace",
   "package.json": "./package.json",
   "main": "./dist/external/index.js",
   "module": "./dist/external/esm/index.mjs",
