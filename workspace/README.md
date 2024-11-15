@@ -26,14 +26,6 @@ Once you created a npm project, you should install Workspace:
 npm install --save-dev @aptos-labs/workspace
 ```
 
-#### Using pnpm or yarn?
-
-If your project uses `pnpm` or `yarn`, you'll also need this package due to the specific behavior of these package managers. Read more about it [here](https://github.com/aptos-labs/workspace/pull/6)
-
-```bash
-pnpm install --save-dev @aptos-labs/aptos-cli
-```
-
 ## Quick Start
 
 To get started with Aptos Workspace, open your terminal, cd into your dapp directory, and run the following command:
