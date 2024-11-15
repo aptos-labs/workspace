@@ -23,7 +23,6 @@ const getDevDependenciesToInstall = (result: PromptResult) => {
   if (result.language === "ts") {
     devDependencies.push("@types/chai@4", "@types/mocha");
   }
-  console.log("devDependencies", devDependencies);
   return devDependencies;
 };
 
