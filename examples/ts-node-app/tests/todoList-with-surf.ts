@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import {
-  generateTestAccount,
   getTestSigners,
   publishPackage,
   workspace,
@@ -30,7 +29,7 @@ describe("todoListWithSurf", () => {
   });
 
   it("it creates a new list", async () => {
-    todoListCreator = await generateTestAccount();
+    [todoListCreator] = await getTestSigners();
     const committedTransactionResponse = await surfClient.entry.create_list({
       account: todoListCreator,
       functionArguments: [],

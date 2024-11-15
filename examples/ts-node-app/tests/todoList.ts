@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import {
-  generateTestAccount,
   getTestSigners,
   publishPackage,
   workspace,
@@ -34,7 +33,7 @@ describe("todoList", () => {
   });
 
   it("it creates a new list", async () => {
-    todoListCreator = await generateTestAccount();
+    [todoListCreator] = await getTestSigners();
     const addNewListTxn = await addNewListTransaction(objectAddress);
 
     const transaction = await workspace.transaction.build.simple({

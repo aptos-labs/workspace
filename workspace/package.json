@@ -1,6 +1,6 @@
 {
   "name": "@aptos-labs/workspace",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "Apache-2.0",
   "bin": {
     "aptos-workspace": "./dist/internal/cli.js",
@@ -42,6 +42,9 @@
   },
   "peerDependenciesMeta": {
     "@aptos-labs/ts-sdk": {
+      "optional": true
+    },
+    "chai": {
       "optional": false
     }
   },
