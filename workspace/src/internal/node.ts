@@ -37,7 +37,7 @@ export class TestNode {
     const childProcess = spawn(cliCommand, cliArgs);
 
     const rl = readline.createInterface({
-      input: childProcess.stderr,
+      input: childProcess.stdout,
       output: process.stdout,
       terminal: false,
     });
@@ -80,10 +80,6 @@ export class TestNode {
           }
         }
       });
-    });
-
-    childProcess.stdout?.on("data", (data: any) => {
-      const str = data.toString();
     });
 
     try {

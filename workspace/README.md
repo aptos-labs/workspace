@@ -10,31 +10,27 @@ Aptos Workspace provides a testing environment framework for Aptos developers to
 
 Aptos Workspace utilizes [mocha](https://mochajs.org/) as the testing framework and [chai](https://www.chaijs.com/) as the assertion framework.
 
+## Getting Started
+
+To start using Workspace you need to create an `npm project` by going to an empty folder (or `cd` into an existing one), and run:
+
+```bash
+npm init --y
+```
+
 ## Installation
+
+Once you created a npm project, you should install Workspace:
 
 ```bash
 npm install --save-dev @aptos-labs/workspace
-```
-
-#### Using Typescript?
-
-Make sure you installed the relevant packages.
-
-```bash
-npm install --save-dev ts-node typescript
-```
-
-To be able to write your tests in TypeScript, you also need these packages:
-
-```bash
-npm install --save-dev chai@4 @types/chai@4 @types/mocha tree-kill
 ```
 
 #### Using pnpm or yarn?
 
 If your project uses `pnpm` or `yarn`, you'll also need this package due to the specific behavior of these package managers. Read more about it [here](https://github.com/aptos-labs/workspace/pull/6)
 
-```
+```bash
 pnpm install --save-dev @aptos-labs/aptos-cli
 ```
 
@@ -55,6 +51,8 @@ Then, Workspace will initialize your testing environment by:
 3. For TypeScript projects, creating a `tsconfig.testing.json` file to be used within Workspace (this step will be skipped if the file already exists).
 
 ## Write tests
+
+By default, Workspace will look for a `contract` folder in the root of your project containing your project's Move contracts. Make sure your Move contracts are in this folder or [configure Workspace to use a different folder](#workspace-config).
 
 If you have initialized Workspace for the first time, feel free to check out the generated test file `my-first-test`.
 
@@ -103,7 +101,7 @@ const [signer1, signer2, signer3] = await getTestSigners(3);
 
 ### `publishPackage()`
 
-A function to publish a Move package to the Workspace test node.
+A function to publish a Move package to the Workspace test node. Make sure you use the correct `namedAddresses` for your contracts.
 
 ```typescript
 import { publishPackage, getTestSigners } from "@aptos-labs/workspace";
@@ -134,6 +132,12 @@ We recommend to add a `npm script` to your `package.json` to make it easier to r
 ```
 
 Then you can simply run `npm test` to run your tests.
+
+This command will run ALL the tests in the `tests` folder, to specify a single test file, you can run:
+
+```bash
+npx aptos-workspace test --grep <test-name> // e.g. npx aptos-workspace test --grep my first test
+```
 
 ## `workspace.config` file
 
@@ -189,7 +193,7 @@ Check out the [Surf example](../examples/ts-node-app/tests/todoList-with-surf.ts
 
 Workspace also supports running Move unit tests.
 
-To run your Move unit tests, you can use the `npx aptos-workspace test` command.
+To run your Move unit tests, you can use the `npx aptos-workspace move-unit-tes` command.
 
 ```bash
 npx aptos-workspace move-unit-test
