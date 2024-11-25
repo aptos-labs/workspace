@@ -1,6 +1,6 @@
 {
   "name": "@aptos-labs/workspace",
-  "version": "0.0.7",
+  "version": "0.0.13",
   "license": "Apache-2.0",
   "bin": {
     "aptos-workspace": "./dist/internal/cli.js",
@@ -34,16 +34,11 @@
   },
   "peerDependencies": {
     "@aptos-labs/ts-sdk": ">=1.30.0",
-    "@types/chai": "^4.2.0",
-    "@types/mocha": "^10.0.7",
-    "@types/node": "^20.14.11",
-    "chai": "^4.0.0",
-    "ts-node": ">=8.0.0",
-    "typescript": ">=4.5.0"
+    "chai": "^4.0.0"
   },
   "peerDependenciesMeta": {
     "@aptos-labs/ts-sdk": {
-      "optional": true
+      "optional": false
     },
     "chai": {
       "optional": false
