@@ -26,6 +26,8 @@ Once you created a npm project, you should install Workspace:
 npm install --save-dev @aptos-labs/workspace
 ```
 
+> **_NOTE:_** Using `pnpm` or `yarn`? You'll need to do some manual work, follow the instructions [here](#using-yarn)
+
 ## Quick Start
 
 To get started with Aptos Workspace, open your terminal, cd into your dapp directory, and run the following command:
@@ -189,4 +191,22 @@ To run your Move unit tests, you can use the `npx aptos-workspace move-unit-tes`
 
 ```bash
 npx aptos-workspace move-unit-test
+```
+
+### Using `pnpm` or `yarn`?
+
+#### Using yarn?
+
+If your project uses `yarn`, and you dont have the `@aptos-labs/ts-sdk` installed, you'll need to manually install it.
+
+```
+yarn add --dev @aptos-labs/ts-sdk
+```
+
+#### Using pnpm?
+
+If your project uses `pnpm`, and you dont have the `@aptos-labs/aptos-cli` installed, you'll need to manually install it.
+
+```
+pnpm add -D @aptos-labs/aptos-cli
 ```

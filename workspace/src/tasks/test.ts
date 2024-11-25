@@ -70,6 +70,7 @@ export const test = async (options: TestOptionsArguments) => {
     await mocha.loadFilesAsync();
   }
 
+  console.log("Spinning up the server to run tests, hold on...");
   // run mocha
   await new Promise<number>((resolve) => {
     mocha.run(resolve);
