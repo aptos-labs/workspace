@@ -1,0 +1,18 @@
+{
+  "name": "multiple-tests",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "npx aptos-workspace test",
+    "test:ci": "npx aptos-workspace test --timeout 300000"
+  },
+  "devDependencies": {
+    "@aptos-labs/workspace": "^0.0.13",
+    "@types/chai": "^4.3.20",
+    "@types/mocha": "^10.0.10",
+    "chai": "^4.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
