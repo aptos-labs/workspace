@@ -3,8 +3,9 @@ import {
   AccountAddressInput,
   Ed25519Account,
 } from "@aptos-labs/ts-sdk";
-import { publishPackageTask } from "../tasks/publish";
+import { publishMovePackageTask } from "../tasks/publishMovePackage";
 import { workspace } from "./workspaceGlobal";
+import { publishCompiledMoveScriptTask } from "../tasks/publishMoveScript";
 
 /**
  * API endpoint to create a test Ed25519Account account
@@ -35,7 +36,7 @@ export async function getTestSigners(
 }
 
 /**
- * Publish a package to the Aptos blockchain.
+ * Publish a Move package to the Aptos blockchain.
  * This method publishes the modules in a Move
  * package to the Aptos blockchain, under an object.
  *
@@ -45,16 +46,35 @@ export async function getTestSigners(
  * By default it takes the first name in the `namedAddresses` object.
  * @returns The address of the published package
  */
-export const publishPackage = async (args: {
+export const publishMovePackage = async (args: {
   publisher: Ed25519Account;
   namedAddresses: Record<string, AccountAddressInput>;
   addressName?: string;
 }): Promise<{ packageObjectAddress: string }> => {
   const { namedAddresses, addressName, publisher } = args;
-  const packageObjectAddress = await publishPackageTask({
+  const packageObjectAddress = await publishMovePackageTask({
     publisher,
     namedAddresses,
     addressName: addressName ?? Object.keys(namedAddresses)[0],
   });
   return { packageObjectAddress };
+};
+
+/**
+ * Publish a Move script to the Aptos blockchain.
+ *
+ * @param args.publisher - The publisher of the script
+ * @param args.compiledScriptPath - The path to the compiled Move script
+ * @returns The output of the published script
+ */
+export const publishCompiledMoveScript = async (args: {
+  publisher: Ed25519Account;
+  compiledScriptPath: string;
+}): Promise<{ scriptOutput: string }> => {
+  const { compiledScriptPath, publisher } = args;
+  const scriptOutput = await publishCompiledMoveScriptTask({
+    publisher,
+    compiledScriptPath,
+  });
+  return { scriptOutput };
 };

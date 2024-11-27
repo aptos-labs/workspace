@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 const {
   getTestSigners,
-  publishPackage,
+  publishMovePackage,
   workspace,
 } = require("@aptos-labs/workspace");
 
@@ -10,7 +10,7 @@ let objectAddress;
 describe("my first test", () => {
   before(async function () {
     const [signer1] = await getTestSigners();
-    const { packageObjectAddress } = await publishPackage({
+    const { packageObjectAddress } = await publishMovePackage({
       publisher: signer1,
       namedAddresses: {
         message_board_addr: signer1.accountAddress,

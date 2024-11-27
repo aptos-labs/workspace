@@ -14,7 +14,7 @@ import { workspace } from "../external/workspaceGlobal";
  * Publish a package to the Aptos blockchain
  * @returns The address of the published package
  */
-export const publishPackageTask = async (args: {
+export const publishMovePackageTask = async (args: {
   publisher: Ed25519Account;
   namedAddresses: Record<string, AccountAddressInput>;
   addressName: string;

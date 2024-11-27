@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import {
   getTestSigners,
-  publishPackage,
+  publishMovePackage,
   workspace,
 } from "@aptos-labs/workspace";
 import { createSurfClient } from "@thalalabs/surf";
@@ -15,7 +15,7 @@ let surfClient: any;
 describe("todoListWithSurf", () => {
   before(async function () {
     const [signer1] = await getTestSigners();
-    const { packageObjectAddress } = await publishPackage({
+    const { packageObjectAddress } = await publishMovePackage({
       publisher: signer1,
       namedAddresses: {
         module_addr: signer1.accountAddress,
