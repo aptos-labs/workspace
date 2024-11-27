@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { getTestSigners, publishPackage, workspace } from "@aptos-labs/workspace";
+import { getTestSigners, publishMovePackage, workspace } from "@aptos-labs/workspace";
 import { Ed25519Account } from "@aptos-labs/ts-sdk";
 import { addNewListTransaction } from "@/entry-functions/addNewList";
 import { addNewTaskTransaction } from "@/entry-functions/addNewTask";
@@ -11,7 +11,7 @@ let objectAddress: string;
 describe("todoList", () => {
   before(async function () {
     const [signer1] = await getTestSigners();
-    const { packageObjectAddress } = await publishPackage({
+    const { packageObjectAddress } = await publishMovePackage({
       publisher: signer1,
       namedAddresses: {
         module_addr: signer1.accountAddress,

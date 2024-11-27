@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 const {
   getTestSigners,
-  publishPackage,
+  publishMovePackage,
   workspace,
 } = require("@aptos-labs/workspace");
 const { addNewListTransaction } = require("../entry-functions/addNewList");
@@ -14,7 +14,7 @@ let todoListCreator;
 describe("todoList", () => {
   before(async function () {
     const [signer1] = await getTestSigners();
-    const { packageObjectAddress } = await publishPackage({
+    const { packageObjectAddress } = await publishMovePackage({
       publisher: signer1,
       namedAddresses: {
         module_addr: signer1.accountAddress,

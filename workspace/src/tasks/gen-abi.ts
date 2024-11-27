@@ -2,7 +2,7 @@ import fs from "fs";
 const cli = require("@aptos-labs/ts-sdk/dist/common/cli/index.js");
 import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
 
-import { publishPackageTask } from "../tasks/publish";
+import { publishMovePackageTask } from "./publishMovePackage";
 import { generateTestAccount } from "../external";
 
 export const genAbi = async (options: { names: string }) => {
@@ -17,7 +17,7 @@ export const genAbi = async (options: { names: string }) => {
     publisher.accountAddress.toString()
   );
   // publish the package to chain
-  const packageObjectAddress = await publishPackageTask({
+  const packageObjectAddress = await publishMovePackageTask({
     publisher,
     namedAddresses: parsedNamedAddresses,
     addressName: Object.keys(parsedNamedAddresses)[0],

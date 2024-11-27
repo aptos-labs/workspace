@@ -93,19 +93,36 @@ const [signer1] = await getTestSigners();
 const [signer1, signer2, signer3] = await getTestSigners(3);
 ```
 
-### `publishPackage()`
+### `publishMovePackage()`
 
 A function to publish a Move package to the Workspace test node. Make sure you use the correct `namedAddresses` for your contracts.
 
 ```typescript
-import { publishPackage, getTestSigners } from "@aptos-labs/workspace";
+import { publishMovePackage, getTestSigners } from "@aptos-labs/workspace";
 
 const [signer1] = await getTestSigners();
-const { packageObjectAddress } = await publishPackage({
+const { packageObjectAddress } = await publishMovePackage({
   publisher: signer1,
   namedAddresses: {
     module_addr: signer1.accountAddress,
   },
+});
+```
+
+### `publishCompiledMoveScript()`
+
+A function to publish a compiled Move script to the Workspace test node.
+
+```typescript
+import {
+  publishCompiledMoveScript,
+  getTestSigners,
+} from "@aptos-labs/workspace";
+
+const [signer1] = await getTestSigners();
+const { scriptOutput } = await publishCompiledMoveScript({
+  publisher: signer1,
+  compiledScriptPath: "path/to/compiled/script.mv",
 });
 ```
 

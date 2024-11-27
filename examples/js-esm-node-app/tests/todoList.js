@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import {
   getTestSigners,
-  publishPackage,
+  publishMovePackage,
   workspace,
 } from "@aptos-labs/workspace";
 import { addNewListTransaction } from "../entry-functions/addNewList.js";
@@ -14,7 +14,7 @@ let todoListCreator;
 describe("todoList", () => {
   before(async function () {
     const [signer1] = await getTestSigners();
-    const { packageObjectAddress } = await publishPackage({
+    const { packageObjectAddress } = await publishMovePackage({
       publisher: signer1,
       addressName: "module_addr",
       namedAddresses: {
