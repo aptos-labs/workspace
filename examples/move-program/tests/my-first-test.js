@@ -15,6 +15,8 @@ describe("my first test", () => {
       namedAddresses: {
         message_board_addr: signer1.accountAddress,
       },
+      addressName: "message_board_addr",
+      packageFolderName: "MessageBoard",
     });
     objectAddress = packageObjectAddress;
   });

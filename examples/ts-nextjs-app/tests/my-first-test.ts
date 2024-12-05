@@ -16,6 +16,7 @@ describe("my first test", () => {
       namedAddresses: {
         module_addr: signer1.accountAddress,
       },
+      addressName: "module_addr",
     });
     // set the object address to the package object address
     objectAddress = packageObjectAddress;

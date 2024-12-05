@@ -10,12 +10,13 @@ let objectAddress: string;
 describe("my first test", () => {
   before(async function () {
     const [signer1] = await getTestSigners();
-    // publish the package, getting back the package pbject address
+    // publish the package, getting back the package object address
     const { packageObjectAddress } = await publishMovePackage({
       publisher: signer1,
       namedAddresses: {
         module_addr: signer1.accountAddress,
       },
+      addressName: "module_addr",
     });
     // set the object address to the package object address
     objectAddress = packageObjectAddress;

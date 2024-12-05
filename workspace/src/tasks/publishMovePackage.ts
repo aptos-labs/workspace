@@ -9,6 +9,7 @@ import {
   getUserConfigVerbose,
 } from "../internal/utils/userConfig";
 import { workspace } from "../external/workspaceGlobal";
+import path from "path";
 
 /**
  * Publish a package to the Aptos blockchain
@@ -18,8 +19,9 @@ export const publishMovePackageTask = async (args: {
   publisher: Ed25519Account;
   namedAddresses: Record<string, AccountAddressInput>;
   addressName: string;
+  packageFolderName?: string;
 }): Promise<string> => {
-  const { publisher, namedAddresses, addressName } = args;
+  const { publisher, namedAddresses, addressName, packageFolderName } = args;
 
   // transform AccountAddressInput to AccountAddress type
   const transformedAddresses: Record<string, AccountAddress> = {};
@@ -34,8 +36,12 @@ export const publishMovePackageTask = async (args: {
   const contractDir = getUserConfigContractDir();
   const configVerbose = getUserConfigVerbose();
 
+  const packagePath = packageFolderName
+    ? path.join(contractDir, packageFolderName)
+    : contractDir;
+
   const response = await new Move().createObjectAndPublishPackage({
-    packageDirectoryPath: contractDir,
+    packageDirectoryPath: packagePath,
     addressName,
     namedAddresses: transformedAddresses,
     extraArguments: [
