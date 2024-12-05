@@ -206,10 +206,16 @@ npm install --save-dev @thalalabs/surf
 ```
 
 Surf uses the contract ABI to infer the types of the contract's functions and events.
-To generate your contract ABI, you can use the `npx aptos-workspace gen-abi` command.
+To generate your contract ABI, you can use the `npx aptos-workspace gen-abi` command and specify the names you used in the `named-addresses` for the Move binary along with the name of the address you want to generate the ABI for.
 
 ```bash
-npx aptos-workspace gen-abi
+# in your Move.toml
+[addresses]
+alice = "0x1"
+bob = "0x2"
+
+# in your terminal
+npx aptos-workspace gen-abi --names alice,bob --name alice
 ```
 
 This function will generate the ABI for your contracts and save it in the `abis` directory.
