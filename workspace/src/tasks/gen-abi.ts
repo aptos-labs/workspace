@@ -1,37 +1,43 @@
 import fs from "fs";
-const cli = require("@aptos-labs/ts-sdk/dist/common/cli/index.js");
-import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
 
 import { publishMovePackageTask } from "./publishMovePackage";
-import { generateTestAccount } from "../external";
+import { generateTestAccount, workspace } from "../external";
+import { createGlobalAptosClientInstance } from "../internal/rootHook";
 
-export const genAbi = async (options: { names: string }) => {
-  const localNode = new cli.LocalNode();
+export type GenAbiOptions = {
+  names: string;
+  name: string;
+  packagePath?: string;
+};
+
+export const genAbi = async (options: GenAbiOptions) => {
+  const { names, name, packagePath } = options;
+  console.log(`Generating ABI... hold on`);
   // spin up a localnet
-  await localNode.run();
+  await createGlobalAptosClientInstance();
   // create a random account
   const publisher = await generateTestAccount();
   // build the named addresses object with the random account address
   const parsedNamedAddresses = buildAddressObject(
-    options.names,
+    names,
     publisher.accountAddress.toString()
   );
   // publish the package to chain
   const packageObjectAddress = await publishMovePackageTask({
     publisher,
     namedAddresses: parsedNamedAddresses,
-    addressName: Object.keys(parsedNamedAddresses)[0],
+    addressName: name,
+    packageFolderName: packagePath,
   });
   // fetch the abi from the node and generate in a local file
   await fetchAbiFromNode(packageObjectAddress);
   // stop the localnet
-  await localNode.stop();
+  await workspace.testNode.stop();
+  console.log(`ABI generated successfully in the abis/ folder`);
 };
 
 export const fetchAbiFromNode = async (objectAddress: string) => {
-  const aptosConfig = new AptosConfig({ network: Network.LOCAL });
-  const aptos = new Aptos(aptosConfig);
-  const modules = await aptos.getAccountModules({
+  const modules = await workspace.getAccountModules({
     accountAddress: objectAddress,
   });
   modules.forEach((module) => {

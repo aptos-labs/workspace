@@ -28,16 +28,28 @@ program
 program
   .command("move-unit-test")
   .description("Run Move unit tests")
-  .action(async () => {
-    await moveUnitTestTask();
+  .option(
+    "--package-path <PATH>",
+    "The path to the Move package with a Move.toml file you want to test, Example: my-contract-folder-name"
+  )
+  .action(async (options) => {
+    await moveUnitTestTask(options);
   });
 
 program
   .command("gen-abi")
   .description("Generate the module ABI")
-  .option(
+  .requiredOption(
     "--names <NAMES>",
     "The names you use in the named-addresses for the move binary, Example: alice,bob"
+  )
+  .requiredOption(
+    "--name <NAME>",
+    "The name from the named-addresses to use to publish the package, Example: alice"
+  )
+  .option(
+    "--package-path <PATH>",
+    "The path to the Move package with a Move.toml file you want to generate the ABI for, Example: my-contract-folder-name"
   )
   .action(async (options) => {
     /**

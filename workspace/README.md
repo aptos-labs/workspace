@@ -206,10 +206,16 @@ npm install --save-dev @thalalabs/surf
 ```
 
 Surf uses the contract ABI to infer the types of the contract's functions and events.
-To generate your contract ABI, you can use the `npx aptos-workspace gen-abi` command.
+To generate your contract ABI, you can use the `npx aptos-workspace gen-abi` command and specify the names you used in the `named-addresses` for the Move binary along with the name of the address you want to generate the ABI for.
 
 ```bash
-npx aptos-workspace gen-abi
+# in your Move.toml
+[addresses]
+alice = "0x1"
+bob = "0x2"
+
+# in your terminal
+npx aptos-workspace gen-abi --names alice,bob --name alice
 ```
 
 This function will generate the ABI for your contracts and save it in the `abis` directory.
@@ -225,6 +231,12 @@ To run your Move unit tests, you can use the `npx aptos-workspace move-unit-tes`
 
 ```bash
 npx aptos-workspace move-unit-test
+```
+
+By default, Workspace will look for the Move package under the folder specified in the `workspace.config` file. If your Move package is under a sub folder (e.g. `contract/MessageBoard` - for cases you have multiple move packages in your project), you can specify a `--package-path` flag.
+
+```bash
+npx aptos-workspace move-unit-test --package-path MessageBoard
 ```
 
 ### Using `pnpm` or `yarn`?
