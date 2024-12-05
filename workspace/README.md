@@ -227,6 +227,12 @@ To run your Move unit tests, you can use the `npx aptos-workspace move-unit-tes`
 npx aptos-workspace move-unit-test
 ```
 
+By default, Workspace will look for the Move package under the folder specified in the `workspace.config` file. If your Move package is under a sub folder (e.g. `contract/MessageBoard` - for cases you have multiple move packages in your project), you can specify a `--package-path` flag.
+
+```bash
+npx aptos-workspace move-unit-test --package-path MessageBoard
+```
+
 ### Using `pnpm` or `yarn`?
 
 #### Using yarn?

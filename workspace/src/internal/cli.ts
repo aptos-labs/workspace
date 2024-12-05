@@ -28,8 +28,12 @@ program
 program
   .command("move-unit-test")
   .description("Run Move unit tests")
-  .action(async () => {
-    await moveUnitTestTask();
+  .option(
+    "--package-path <PATH>",
+    "The path to the Move package with a Move.toml file you want to test, Example: ./contracts/my-contract"
+  )
+  .action(async (options) => {
+    await moveUnitTestTask(options);
   });
 
 program
