@@ -20,6 +20,7 @@ describe("todoListWithSurf", () => {
       namedAddresses: {
         module_addr: signer1.accountAddress,
       },
+      addressName: "module_addr",
     });
     objectAddress = packageObjectAddress;
     surfClient = createSurfClient(workspace).useABI(
