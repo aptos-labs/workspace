@@ -4,12 +4,9 @@ import {
   AccountAddressInput,
 } from "@aptos-labs/ts-sdk";
 import { Move } from "@aptos-labs/ts-sdk/dist/common/cli/index.js";
-import {
-  getUserConfigContractDir,
-  getUserConfigVerbose,
-} from "../internal/utils/userConfig";
+import { getUserConfigVerbose } from "../internal/utils/userConfig";
 import { workspace } from "../external/workspaceGlobal";
-import path from "path";
+import { findMovePackageFolderPath } from "../internal/utils/findMovePackageFolderPath";
 
 /**
  * Publish a package to the Aptos blockchain
@@ -19,9 +16,9 @@ export const publishMovePackageTask = async (args: {
   publisher: Ed25519Account;
   namedAddresses: Record<string, AccountAddressInput>;
   addressName: string;
-  packageFolderName?: string;
+  packageName: string;
 }): Promise<string> => {
-  const { publisher, namedAddresses, addressName, packageFolderName } = args;
+  const { publisher, namedAddresses, addressName, packageName } = args;
 
   // transform AccountAddressInput to AccountAddress type
   const transformedAddresses: Record<string, AccountAddress> = {};
@@ -32,13 +29,9 @@ export const publishMovePackageTask = async (args: {
     }
   }
 
-  // get the configured contract dir
-  const contractDir = getUserConfigContractDir();
-  const configVerbose = getUserConfigVerbose();
+  const packagePath = await findMovePackageFolderPath(packageName);
 
-  const packagePath = packageFolderName
-    ? path.join(contractDir, packageFolderName)
-    : contractDir;
+  const configVerbose = getUserConfigVerbose();
 
   const response = await new Move().createObjectAndPublishPackage({
     packageDirectoryPath: packagePath,

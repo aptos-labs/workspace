@@ -5,6 +5,9 @@ import { workspace } from "../external/workspaceGlobal";
 
 /**
  * Publish a package to the Aptos blockchain
+ * @param args.publisher - The Ed25519Account of the package publisher
+ * @param args.compiledScriptPath - The path to the compiled Move script
+ *
  * @returns The address of the published package
  */
 export const publishCompiledMoveScriptTask = async (args: {

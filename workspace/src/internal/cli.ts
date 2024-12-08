@@ -6,7 +6,7 @@ import { moveUnitTestTask } from "../tasks/unit-test";
 
 program
   .command("init")
-  .option("-ts, --typescript [value]", "start a typescript project")
+  .option("-ts, --typescript", "start a typescript project")
   .option("-js, --javascript", "start a javascript project")
   .description("Initialize a workspace testing program")
   .action(async () => {
@@ -28,9 +28,9 @@ program
 program
   .command("move-unit-test")
   .description("Run Move unit tests")
-  .option(
-    "--package-path <PATH>",
-    "The path to the Move package with a Move.toml file you want to test, Example: my-contract-folder-name"
+  .requiredOption(
+    "--package-name <NAME>",
+    "The name of the Move package with a Move.toml file you want to test, Example: MessageBoard"
   )
   .action(async (options) => {
     await moveUnitTestTask(options);
@@ -45,11 +45,11 @@ program
   )
   .requiredOption(
     "--name <NAME>",
-    "The name from the named-addresses to use to publish the package, Example: alice"
+    "The name from the named-addresses to use to publish the package under, Example: alice"
   )
-  .option(
-    "--package-path <PATH>",
-    "The path to the Move package with a Move.toml file you want to generate the ABI for, Example: my-contract-folder-name"
+  .requiredOption(
+    "--package-name <NAME>",
+    "The name of the Move package with a Move.toml file you want to generate the ABI for, Example: MessageBoard"
   )
   .action(async (options) => {
     /**

@@ -43,7 +43,7 @@ export async function getTestSigners(
  * @param args.publisher - The publisher of the package
  * @param args.namedAddresses - The named addresses for the Move binary, {namedAddresses: {alice:"0x123",bob:"0x456"}}
  * @param args.addressName - The named address to use for deployment, {addressName: "alice"}
- * @param args.packageFolderName - optional. The folder name of the Move package to publish, {packageFolderName: "MessageBoard"}
+ * @param args.packageName - The name of the Move package to publish, {packageName: "MessageBoard"}
  * By default it takes the first name in the `namedAddresses` object.
  * @returns The address of the published package
  */
@@ -51,14 +51,14 @@ export const publishMovePackage = async (args: {
   publisher: Ed25519Account;
   namedAddresses: Record<string, AccountAddressInput>;
   addressName: string;
-  packageFolderName?: string;
+  packageName: string;
 }): Promise<{ packageObjectAddress: string }> => {
-  const { namedAddresses, addressName, publisher, packageFolderName } = args;
+  const { namedAddresses, addressName, publisher, packageName } = args;
   const packageObjectAddress = await publishMovePackageTask({
     publisher,
     namedAddresses,
     addressName,
-    packageFolderName,
+    packageName,
   });
   return { packageObjectAddress };
 };
