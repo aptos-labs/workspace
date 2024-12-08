@@ -1,25 +1,16 @@
-import path from "path";
 import { Move } from "@aptos-labs/ts-sdk/dist/common/cli/index.js";
 import fs from "fs";
 import toml from "toml";
-import {
-  getUserConfigContractDir,
-  getUserConfigVerbose,
-} from "../internal/utils/userConfig";
+import { findMovePackageFolderPath } from "../internal/utils/findMovePackageFolderPath";
 
 export type MoveUnitTestOptions = {
-  packagePath?: string;
+  packageName: string;
 };
 
 export const moveUnitTestTask = async (options: MoveUnitTestOptions) => {
-  const { packagePath } = options;
+  const { packageName } = options;
 
-  // get the configured contract dir
-  const contractDir = getUserConfigContractDir();
-
-  const contractPackagePath = packagePath
-    ? path.join(contractDir, packagePath)
-    : contractDir;
+  const contractPackagePath = await findMovePackageFolderPath(packageName);
 
   // read the Move.toml file
   var str = fs.readFileSync(contractPackagePath + "/Move.toml", "utf-8");

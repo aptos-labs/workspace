@@ -7,11 +7,11 @@ import { createGlobalAptosClientInstance } from "../internal/rootHook";
 export type GenAbiOptions = {
   names: string;
   name: string;
-  packagePath?: string;
+  packageName: string;
 };
 
 export const genAbi = async (options: GenAbiOptions) => {
-  const { names, name, packagePath } = options;
+  const { names, name, packageName } = options;
   console.log(`Generating ABI... hold on`);
   // spin up a localnet
   await createGlobalAptosClientInstance();
@@ -22,12 +22,13 @@ export const genAbi = async (options: GenAbiOptions) => {
     names,
     publisher.accountAddress.toString()
   );
+
   // publish the package to chain
   const packageObjectAddress = await publishMovePackageTask({
     publisher,
     namedAddresses: parsedNamedAddresses,
     addressName: name,
-    packageFolderName: packagePath,
+    packageName,
   });
   // fetch the abi from the node and generate in a local file
   await fetchAbiFromNode(packageObjectAddress);
