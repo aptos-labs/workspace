@@ -14,7 +14,7 @@ let todoListCreator;
 describe("todoList", () => {
   before(async function () {
     const [signer1] = await getTestSigners();
-    const { packageObjectAddress } = await publishMovePackage({
+    const packageObjectAddress = await publishMovePackage({
       publisher: signer1,
       addressName: "module_addr",
       namedAddresses: {

@@ -52,7 +52,7 @@ export const publishMovePackage = async (args: {
   namedAddresses: Record<string, AccountAddressInput>;
   addressName: string;
   packageName: string;
-}): Promise<{ packageObjectAddress: string }> => {
+}): Promise<string> => {
   const { namedAddresses, addressName, publisher, packageName } = args;
   const packageObjectAddress = await publishMovePackageTask({
     publisher,
@@ -60,7 +60,7 @@ export const publishMovePackage = async (args: {
     addressName,
     packageName,
   });
-  return { packageObjectAddress };
+  return packageObjectAddress;
 };
 
 /**
