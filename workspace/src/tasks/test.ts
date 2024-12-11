@@ -12,6 +12,7 @@ import { isTSProject } from "../internal/utils/typescript-support";
 export type TestOptionsArguments = {
   timeout: string;
   grep: string;
+  jobs: number;
 };
 
 export const test = async (options: TestOptionsArguments) => {
@@ -37,6 +38,10 @@ export const test = async (options: TestOptionsArguments) => {
 
   if (options.grep !== undefined) {
     mochaConfig.grep = options.grep;
+  }
+
+  if (options.jobs !== undefined) {
+    mochaConfig.jobs = options.jobs;
   }
 
   const mocha = new Mocha(mochaConfig);
