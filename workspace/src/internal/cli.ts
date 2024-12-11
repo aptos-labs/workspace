@@ -76,6 +76,10 @@ program
     "-g, --grep <file>",
     "Only run tests matching the given string or regexp"
   )
+  .option(
+    "-j, --jobs <number>",
+    "Specify the number of jobs to run in parallel"
+  )
   .action(async (options) => {
     await test(options);
   });
