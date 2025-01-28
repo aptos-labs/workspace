@@ -5,12 +5,14 @@ import { getUserConfigPath } from "./userConfig";
 export const loadTsNode = () => {
   try {
     require.resolve("typescript");
+    console.log("typescript installed");
   } catch {
     throw new Error(TYPESCRIPT_NOT_INSTALLED);
   }
 
   try {
     require.resolve("ts-node");
+    console.log("ts-node installed");
   } catch {
     throw new Error(TS_NODE_NOT_INSTALLED);
   }
@@ -19,7 +21,7 @@ export const loadTsNode = () => {
   process.env.TS_NODE_PROJECT = userProjectPath;
   // set env variable so workspace use the correct tsconfig file
   process.env.TS_NODE_PROJECT = TSCONFIG_TESTING_JSON;
-
+  console.log("process.env.TS_NODE_PROJECT", process.env.TS_NODE_PROJECT);
   // register ts-node to transpile TS files into JS files
   require("ts-node/register/transpile-only");
   // register tsconfig-paths so nodejs would understand the "path" if set in the tsconfig file

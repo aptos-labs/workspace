@@ -8,7 +8,7 @@ import {
 } from "../internal/utils/source-files";
 import { MochaOptions } from "mocha";
 import { isTSProject } from "../internal/utils/typescript-support";
-import * as os from 'os';
+import * as os from "os";
 import { exec } from "child_process";
 import semver from "semver";
 
@@ -20,9 +20,12 @@ export type TestOptionsArguments = {
 
 function max_num_jobs(): number {
   const cpuCores = os.cpus().length;
-  const totalMemoryGB = os.totalmem() / (1024 ** 3);
+  const totalMemoryGB = os.totalmem() / 1024 ** 3;
 
-  return Math.max(1, Math.min(Math.floor(cpuCores / 4), Math.floor(totalMemoryGB / 4)));
+  return Math.max(
+    1,
+    Math.min(Math.floor(cpuCores / 4), Math.floor(totalMemoryGB / 4))
+  );
 }
 
 async function checkAptosVersion(): Promise<void> {
@@ -32,8 +35,8 @@ async function checkAptosVersion(): Promise<void> {
         return reject(
           new Error(
             "Failed to run npx aptos, have you installed it properly?\n" +
-            "If your project uses `yarn`, you need to run `yarn add --dev @aptos-labs/ts-sdk`.\n" +
-            "If your project uses `pnpm`, you need to run `pnpm add -D @aptos-labs/aptos-cli`."
+              "If your project uses `yarn`, you need to run `yarn add --dev @aptos-labs/ts-sdk`.\n" +
+              "If your project uses `pnpm`, you need to run `pnpm add -D @aptos-labs/aptos-cli`."
           )
         );
       }
@@ -82,15 +85,14 @@ export const test = async (options: TestOptionsArguments) => {
     mochaRequire.push(path.join(__dirname, "internal/register.js"));
     mochaConfig.require = mochaRequire;
   }
-
+  console.log("mochaConfig", mochaConfig);
   if (options.grep !== undefined) {
     mochaConfig.grep = options.grep;
   }
 
   if (options.jobs !== undefined) {
     mochaConfig.jobs = options.jobs;
-  }
-  else {
+  } else {
     mochaConfig.jobs = max_num_jobs();
   }
 
@@ -104,13 +106,15 @@ export const test = async (options: TestOptionsArguments) => {
     path.resolve(getUserProjectTestsFolder(userProjectPath), file)
   );
   allTestFiles.forEach((file) => mocha.addFile(file));
-
+  console.log("allTestFiles", allTestFiles);
   // if the project is of type "module" or if there's some ESM test file,
   // we call loadFilesAsync to enable Mocha's ESM support
   const projectPackageJson = await getUserProjectPackageJson();
   const isTypeModule = projectPackageJson.type === "module";
   const hasEsmTest = allTestFiles.some((file) => file.endsWith(".mjs"));
   let testsAlreadyRun = false;
+  console.log("isTypeModule", isTypeModule);
+  console.log("hasEsmTest", hasEsmTest);
   if (isTypeModule || hasEsmTest) {
     // Because of the way the ESM cache works, loadFilesAsync doesn't work
     // correctly if used twice within the same process, so we throw an error

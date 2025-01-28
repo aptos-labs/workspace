@@ -18,7 +18,7 @@ jobs:
       # Install node
       - uses: actions/setup-node@v4
         with:
-          node-version: "21"
+          node-version: "22"
 
       - name: Build workspace local package
         run: |
@@ -30,4 +30,5 @@ jobs:
         run: |
           cd examples/ts-node-app
           npm install
+          npx tsc --project tsconfig.testing.json
           npm run test:ci
