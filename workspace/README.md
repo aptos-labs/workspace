@@ -40,7 +40,7 @@ The prompt will ask you to choose the language you want to use - `TypeScript` or
 
 Then, Workspace will initialize your testing environment by:
 
-1. Creating a `workspace.config` file to be used in your project.
+1. Creating a `workspace.config` file to be used in your project. A
 2. Creating a `tests` folder with a `my-first-test` example file (this step will be skipped if the folder already exists).
 3. For TypeScript projects, creating a `tsconfig.testing.json` file to be used within Workspace (this step will be skipped if the file already exists).
 
