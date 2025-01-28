@@ -8,6 +8,9 @@ import {
 } from "../internal/utils/source-files";
 import { MochaOptions } from "mocha";
 import { isTSProject } from "../internal/utils/typescript-support";
+import * as os from 'os';
+import { exec } from "child_process";
+import semver from "semver";
 
 export type TestOptionsArguments = {
   timeout: string;
@@ -15,15 +18,59 @@ export type TestOptionsArguments = {
   jobs: number;
 };
 
+function max_num_jobs(): number {
+  const cpuCores = os.cpus().length;
+  const totalMemoryGB = os.totalmem() / (1024 ** 3);
+
+  return Math.max(1, Math.min(Math.floor(cpuCores / 4), Math.floor(totalMemoryGB / 4)));
+}
+
+async function checkAptosVersion(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    exec("npx aptos --version", (error, stdout, stderr) => {
+      if (error) {
+        return reject(
+          new Error(
+            "Failed to run npx aptos, have you installed it properly?\n" +
+            "If your project uses `yarn`, you need to run `yarn add --dev @aptos-labs/ts-sdk`.\n" +
+            "If your project uses `pnpm`, you need to run `pnpm add -D @aptos-labs/aptos-cli`."
+          )
+        );
+      }
+
+      const versionMatch = stdout.match(/aptos (\d+\.\d+\.\d+)/);
+
+      if (!versionMatch) {
+        return reject(new Error("Could not determine the Aptos CLI version."));
+      }
+
+      const version = versionMatch[1];
+      const minimumVersion = "6.0.2";
+
+      if (semver.lt(version, minimumVersion)) {
+        return reject(
+          new Error(
+            `Aptos CLI version needs to be at least ${minimumVersion}, please run "npx aptos update aptos" to update.`
+          )
+        );
+      }
+
+      console.log(`Aptos CLI version ${version} detected.`);
+      resolve(); // Successfully completed the check
+    });
+  });
+}
+
 export const test = async (options: TestOptionsArguments) => {
   const userProjectPath = process.cwd();
 
   isUserProjectTestsFolderExists(userProjectPath);
+  await checkAptosVersion();
 
   const { default: Mocha } = await import("mocha");
 
   const mochaConfig: MochaOptions = {
-    timeout: options.timeout ?? 20000, // to support local testnet run, TODO improve performance
+    timeout: options.timeout ?? 60000, // to support local testnet run, TODO improve performance
     require: [path.join(__dirname, "internal/rootHook.js")],
     parallel: true,
     grep: "",
@@ -42,6 +89,9 @@ export const test = async (options: TestOptionsArguments) => {
 
   if (options.jobs !== undefined) {
     mochaConfig.jobs = options.jobs;
+  }
+  else {
+    mochaConfig.jobs = max_num_jobs();
   }
 
   const mocha = new Mocha(mochaConfig);

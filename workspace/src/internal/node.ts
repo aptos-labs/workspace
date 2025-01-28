@@ -24,21 +24,21 @@ function generateRandomId(length: number): string {
 export class TestNode {
   private static readonly TIMEOUT_SECONDS = 60;
 
-  private constructor(private info: NodeInfo | null) {}
+  private constructor(private info: NodeInfo | null) { }
 
   public static async spawn(): Promise<TestNode> {
     const id = generateRandomId(4);
 
     const configVerbose = getUserConfigVerbose();
 
-    const cliCommand = "aptos-workspace-server";
-    const cliArgs: string[] = [];
+    const cliCommand = "npx";
+    const cliArgs: string[] = ["aptos", "workspace", "run"];
 
-    const childProcess = spawn(cliCommand, cliArgs);
+    const childProcess = spawn(cliCommand, cliArgs, { detached: false, stdio: ['ignore', 'pipe', 'ignore'], shell: true });
 
     const rl = readline.createInterface({
       input: childProcess.stdout,
-      output: process.stdout,
+      output: undefined,
       terminal: false,
     });
 
@@ -123,12 +123,19 @@ export class TestNode {
   public async stop() {
     await new Promise((resolve, reject) => {
       if (!this.info?.process?.pid) return;
-      kill(this.info.process.pid, (err) => {
+
+      const process = this.info.process;
+      kill(this.info.process.pid, 'SIGINT', (err) => {
         if (err) {
           reject(err);
-        } else {
-          resolve(true);
+          return;
         }
+
+        process.on('exit', (code, signal) => {
+          resolve(true)
+        });
+
+        // TODO: timeout?
       });
     });
   }

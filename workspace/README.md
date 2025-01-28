@@ -10,6 +10,15 @@ Aptos Workspace provides a testing environment framework for Aptos developers to
 
 Aptos Workspace utilizes [mocha](https://mochajs.org/) as the testing framework and [chai](https://www.chaijs.com/) as the assertion framework.
 
+## Prerequisites
+Currently you'll need to have Docker installed on your system in order to use Aptos Workspace.
+Docker is required because Aptos Workspace uses it to run a local indexer instance, which is part of the local network.
+
+### Install Docker
+- **Mac**: Download [Docker Desktop for macOS](https://docs.docker.com/desktop/setup/install/mac-install/) from the Docker website.
+- **Windows**: Download [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/) from the Docker website.
+- **Linux**: Download [Docker Desktop for Linux](https://docs.docker.com/desktop/setup/install/linux/), or install [Docker Engine](https://docs.docker.com/engine/install/).
+
 ## Getting Started
 
 To start using Workspace you need to create an `npm project` by going to an empty folder (or `cd` into an existing one), and run:
