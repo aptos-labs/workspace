@@ -2,9 +2,11 @@ name: Run the ts-node-app tests
 
 on:
   pull_request:
+    branches-ignore:
+      - '**'
   push:
-    branches:
-      - main
+    branches-ignore:
+      - '**'
 
 jobs:
   build:

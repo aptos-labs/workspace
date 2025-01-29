@@ -2,13 +2,22 @@
 
 Aptos Workspace is an integrated development environment designed to make innovation on Aptos easy and intuitive by removing unnecessary obstacles and lowering the barrier to entry.
 
-> **_NOTE:_** This is an alpha, non-production-ready version. Breaking changes are expected.
+> **_NOTE:_** This is an alpha, non-production-ready version. Some features have not been implemented yet and breaking changes are expected.
 
 ## Overview
 
 Aptos Workspace provides a testing environment framework for Aptos developers to easily run integration tests for their dApps.
 
 Aptos Workspace utilizes [mocha](https://mochajs.org/) as the testing framework and [chai](https://www.chaijs.com/) as the assertion framework.
+
+## Prerequisites
+Currently you'll need to have Docker installed on your system in order to use Aptos Workspace.
+Docker is required because Aptos Workspace uses it to run a local indexer instance, which is part of the local network.
+
+### Install Docker
+- **Mac**: Download [Docker Desktop for macOS](https://docs.docker.com/desktop/setup/install/mac-install/) from the Docker website.
+- **Windows**: Download [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/) from the Docker website.
+- **Linux**: Download [Docker Desktop for Linux](https://docs.docker.com/desktop/setup/install/linux/), or install [Docker Engine](https://docs.docker.com/engine/install/).
 
 ## Getting Started
 
