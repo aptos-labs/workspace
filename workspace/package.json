@@ -1,6 +1,6 @@
 {
   "name": "@aptos-labs/workspace",
-  "version": "0.0.19",
+  "version": "0.0.21",
   "license": "Apache-2.0",
   "bin": {
     "aptos-workspace": "./dist/internal/cli.js",
@@ -30,7 +30,8 @@
     "prompts": "^2.4.2",
     "toml": "^3.0.0",
     "tree-kill": "1.2.2",
-    "tsconfig-paths": "^4.2.0"
+    "tsconfig-paths": "^4.2.0",
+    "semver": "^7.5.8"
   },
   "peerDependencies": {
     "@aptos-labs/ts-sdk": ">=1.30.0",
