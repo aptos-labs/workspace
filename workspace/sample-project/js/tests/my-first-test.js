@@ -1,9 +1,5 @@
-import { expect } from "chai";
-import {
-  publishMovePackage,
-  getTestSigners,
-  workspace,
-} from "@aptos-labs/workspace";
+const { expect } = require("chai");
+const { publishMovePackage, getTestSigners, workspace } = require("@aptos-labs/workspace");
 
 let packageObjectAddress;
 

@@ -42,7 +42,7 @@ export const publishMovePackageTask = async (args: {
       `--private-key=${publisher.privateKey}`,
       `--url=${workspace.config.fullnode}`,
     ],
-    showStdout: configVerbose ?? false,
+    showStdout: true // configVerbose ?? false,
   });
   return response.objectAddress;
 };
