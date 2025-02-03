@@ -28,6 +28,8 @@ const getDevDependenciesToInstallCommand = async (
   if (result.language === "ts") {
     REQUIRED_DEV_DEPENDENCIES["@types/chai"] = "4";
     REQUIRED_DEV_DEPENDENCIES["@types/mocha"] = "^10.0.7";
+    REQUIRED_DEV_DEPENDENCIES["typescript"] = "^5.7.3";
+    REQUIRED_DEV_DEPENDENCIES["ts-node"] = "^10.9.2";
   }
 
   // Filter out already installed peer dependencies
