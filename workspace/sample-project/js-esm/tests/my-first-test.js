@@ -1,32 +1,70 @@
 import { expect } from "chai";
 import {
-  getTestSigners,
   publishMovePackage,
+  getTestSigners,
   workspace,
 } from "@aptos-labs/workspace";
 
-let objectAddress;
+let packageObjectAddress;
 
 describe("my first test", () => {
-  before(async function () {
+  let signer;
+
+  it("publish the contract", async () => {
     const [signer1] = await getTestSigners();
-    // publish the package, getting back the package pbject address
-    const packageObjectAddress = await publishMovePackage({
-      publisher: signer1,
+    signer = signer1;
+
+    // publish the package, getting back the package object address
+    packageObjectAddress = await publishMovePackage({
+      publisher: signer,
       namedAddresses: {
-        module_addr: signer1.accountAddress,
+        module_addr: signer.accountAddress,
       },
-      addressName: "module_addr", // Enter your address name here
-      packageName: "", // Enter your package name here
+      addressName: "hello_blockchain",
+      packageName: "HelloBlockchain",
     });
-    // set the object address to the package object address
-    objectAddress = packageObjectAddress;
+
+    // get the object account modules
+    const accountModules = await workspace.getAccountModules({
+      accountAddress: packageObjectAddress,
+    });
+    // expect the account modules to have at least one module
+    expect(accountModules).to.have.length.at.least(1);
   });
 
-  it("it publishes the contract under the correct address", async () => {
-    const accountModule = await workspace.getAccountModules({
-      accountAddress: objectAddress,
+  it("set message", async () => {
+    // execute entry function `message::set_message(signer, "foobar")`
+    const transaction = await workspace.transaction.build.simple({
+      sender: signer.accountAddress,
+      data: {
+        function: `${packageObjectAddress}::message::set_message`,
+        functionArguments: ["foobar"],
+      }
     });
-    expect(accountModule).to.have.length.at.least(1);
-  });
+
+    const response = await workspace.signAndSubmitTransaction({
+      signer: signer,
+      transaction
+    });
+
+    // wait for the transaction to complete
+    const committedTransactionResponse = await workspace.waitForTransaction({
+      transactionHash: response.hash,
+    });
+    // the transaction should succeed
+    expect(committedTransactionResponse.success).true;
+  })
+
+  it("get message", async () => {
+    // execute view function `message::get_message()`
+    const [value] = await workspace.view({
+      payload: {
+        function: `${packageObjectAddress}::message::get_message`,
+        typeArguments: [],
+        functionArguments: [signer.accountAddress]
+      }
+    });
+    // the view function should return the original message
+    expect(value?.toString()).equals("foobar");
+  })
 });
