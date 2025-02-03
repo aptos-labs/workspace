@@ -5,3 +5,4 @@ Aptos Workspace is an integrated development environment designed to make innova
 This repository contains the [Aptos Workspace package](./workspace) and [examples](./examples) of how to use it.
 
 See the [Workspace README](./workspace/README.md) for more information.
+Alternatively, check out [First Aptos Workspace Project](./workspace/first-aptos-workspace-project.md) for a step-by-step tutorial.
