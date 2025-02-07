@@ -34,7 +34,7 @@ export class TestNode {
     const cliCommand = "npx";
     const cliArgs: string[] = ["aptos", "workspace", "run"];
 
-    const childProcess = spawn(cliCommand, cliArgs, { detached: false, stdio: ['ignore', 'pipe', 'ignore'], shell: true });
+    const childProcess = spawn(cliCommand, cliArgs, { detached: false, stdio: ['pipe', 'pipe', 'ignore'], shell: true });
 
     const rl = readline.createInterface({
       input: childProcess.stdout,
@@ -122,21 +122,23 @@ export class TestNode {
 
   public async stop() {
     await new Promise((resolve, reject) => {
-      if (!this.info?.process?.pid) return;
+      if (this.info == null) return;
 
       const process = this.info.process;
-      kill(this.info.process.pid, 'SIGINT', (err) => {
-        if (err) {
-          reject(err);
-          return;
-        }
 
-        process.on('exit', (code, signal) => {
-          resolve(true)
+      const timeout = setTimeout(() => {
+        reject(new Error("workspace server process failed to exit within given timeout (90s)"));
+      }, 90000);
+
+      try {
+        process.stdin.write("stop\n");
+
+        process.on("exit", (code, signal) => {
+          resolve(true);
         });
-
-        // TODO: timeout?
-      });
+      } catch (err) {
+        reject(err);
+      }
     });
   }
 }

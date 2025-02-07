@@ -26,6 +26,7 @@ const getDevDependenciesToInstallCommand = async (
   result: PromptResult
 ): Promise<string[]> => {
   if (result.language === "ts") {
+    REQUIRED_DEV_DEPENDENCIES["@aptos-labs/aptos-cli"] = "^1.0.2";
     REQUIRED_DEV_DEPENDENCIES["@types/chai"] = "4";
     REQUIRED_DEV_DEPENDENCIES["@types/mocha"] = "^10.0.7";
     REQUIRED_DEV_DEPENDENCIES["typescript"] = "^5.7.3";

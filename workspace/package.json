@@ -1,6 +1,6 @@
 {
   "name": "@aptos-labs/workspace",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "license": "Apache-2.0",
   "bin": {
     "aptos-workspace": "./dist/internal/cli.js",
