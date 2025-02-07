@@ -45,7 +45,7 @@ async function checkAptosVersion(): Promise<void> {
       }
 
       const version = versionMatch[1];
-      const minimumVersion = "6.0.2";
+      const minimumVersion = "6.1.1";
 
       if (semver.lt(version, minimumVersion)) {
         return reject(
