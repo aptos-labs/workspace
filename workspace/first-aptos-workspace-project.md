@@ -2,15 +2,15 @@
 
 This is a tutorial that walks you through the steps to create a TS/JS project using Aptos Workspace. By the end, you’ll have a functional development setup with a sample Move contract and integration test.
 
-# Step 0: Install Prerequisites
+# Step 0: Install Dependencies
 
 Before getting started, please make sure you have the necessary dependencies installed.
 
-Follow the [Aptos Workspace README](https://github.com/aptos-labs/workspace/blob/main/workspace/README.md#prerequisites) to install prerequisites like **Docker**.
-
-If you don’t have **Node.js** and **npm** installed, refer to the official installation guide:
-
-- [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+Follow the [this section of the Aptos Workspace README](../README.md#Dependencies) to install the required Dependencies:
+- Node.js and npm
+- git
+- Docker
+- Microsoft VC++ Redistributable (windows only)
 
 # Step 1: Initialize the npm Project
 
