@@ -10,14 +10,36 @@ Aptos Workspace provides a testing environment framework for Aptos developers to
 
 Aptos Workspace utilizes [mocha](https://mochajs.org/) as the testing framework and [chai](https://www.chaijs.com/) as the assertion framework.
 
-## Prerequisites
-Currently you'll need to have Docker installed on your system in order to use Aptos Workspace.
-Docker is required because Aptos Workspace uses it to run a local indexer instance, which is part of the local network.
+## Dependencies
+The following dependencies are needed for running Aptos Workspace. Make sure you
+install them correctly.
 
-### Install Docker
+### Node.js and npm
+Install Node.js and npm by following the official guide:
+- [Download and Install Node.js & npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+### git
+Git is required for the Move package system to fetch remote dependencies.
+- **Mac**
+  - Install via homebrew: `brew install git`
+  - Install via MacPorts: `sudo port install git`
+- **Windows**
+  - Download and install from: [Git for Windows](https://git-scm.com/downloads/win)
+- **Linux**:
+  - Install via your package manager
+  - Detailed instructions here: [Git for Linux](https://git-scm.com/downloads/linux)
+
+### Docker
+Currently, Docker is required to run Aptos Workspace as it is used to run a local indexer instance, which is part of the local network used for simulation.
+
+Follow these links to install Docker:
 - **Mac**: Download [Docker Desktop for macOS](https://docs.docker.com/desktop/setup/install/mac-install/) from the Docker website.
 - **Windows**: Download [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/) from the Docker website.
 - **Linux**: Download [Docker Desktop for Linux](https://docs.docker.com/desktop/setup/install/linux/), or install [Docker Engine](https://docs.docker.com/engine/install/).
+
+### Microsoft Visual C++ Redistributable (Windows Only)
+Windows users must install the Microsoft Visual C++ Redistributable, in order to run the Aptos CLI executable, which is required for Aptos Workspace.
+- Download and install from: [Microsoft VC++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170)
 
 ## Getting Started
 
