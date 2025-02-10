@@ -23,6 +23,7 @@ Git is required for the Move package system to fetch remote dependencies.
 - **Mac**
   - Install via homebrew: `brew install git`
   - Install via MacPorts: `sudo port install git`
+  - Install via other channels: [Git for macOS](https://git-scm.com/downloads/mac)
 - **Windows**
   - Download and install from: [Git for Windows](https://git-scm.com/downloads/win)
 - **Linux**:
