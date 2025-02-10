@@ -6,7 +6,7 @@ This is a tutorial that walks you through the steps to create a TS/JS project us
 
 Before getting started, please make sure you have the necessary dependencies installed.
 
-Follow the [this section of the Aptos Workspace README](../README.md#Dependencies) to install the required Dependencies:
+Follow the [this section of the Aptos Workspace README](./README.md#Dependencies) to install the required Dependencies:
 - Node.js and npm
 - git
 - Docker
