@@ -13,7 +13,7 @@
   "dependencies": {
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.5",
+    "next": "14.2.21",
     "@aptos-labs/ts-sdk": "^1.30.0",
     "@aptos-labs/wallet-adapter-react": "^3.5.0"
   },
