@@ -13,9 +13,10 @@
   "types": "./dist/external/index.d.ts",
   "scripts": {
     "build:clean": "rm -rf dist",
-    "build": "npm run build:clean && tsup",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "fmt": "prettier -- --write"
+    "build": "pnpm run build:clean && tsup",
+    "lint": "biome lint .",
+    "fmt": "biome format --write .",
+    "check": "biome check --write ."
   },
   "files": [
     "dist",
@@ -53,13 +54,9 @@
     "@types/mocha": "^10.0.7",
     "@types/node": "^20.14.11",
     "@types/semver": "^7.5.8",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
+    "@biomejs/biome": "^2.0.0",
     "chai": "^4.2.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-mocha": "^10.5.0",
     "mocha": "^10.7.0",
-    "prettier": "^3.3.2",
     "ts-node": "10.9.1",
     "tsup": "^8.2.4",
     "typescript": "^5.2.2"
