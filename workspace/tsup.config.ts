@@ -1,5 +1,5 @@
-import { defineConfig } from "tsup";
 import type { Options } from "tsup";
+import { defineConfig } from "tsup";
 
 const DEFAULT_CONFIG: Options = {
   bundle: true,
