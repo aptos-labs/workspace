@@ -4,20 +4,23 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  axios: 1.16.0
+
 importers:
 
   .:
     dependencies:
       '@aptos-labs/ts-sdk':
-        specifier: ^1.30.0
-        version: 1.39.0(axios@1.14.0)(got@11.8.6)
+        specifier: ^5.2.1
+        version: 5.2.1(got@11.8.6)
       '@thalalabs/surf':
         specifier: ^1.7.3
-        version: 1.10.0(@aptos-labs/ts-sdk@1.39.0(axios@1.14.0)(got@11.8.6))(google-protobuf@3.21.4)(typescript@5.9.3)
+        version: 1.10.0(@aptos-labs/ts-sdk@5.2.1(got@11.8.6))(google-protobuf@3.21.4)(typescript@5.9.3)
     devDependencies:
       '@aptos-labs/workspace':
         specifier: file:../../workspace
-        version: file:../../workspace(@aptos-labs/ts-sdk@1.39.0(axios@1.14.0)(got@11.8.6))(chai@4.5.0)
+        version: file:../../workspace(@aptos-labs/ts-sdk@5.2.1(got@11.8.6))(chai@4.5.0)
       '@biomejs/biome':
         specifier: ^2.0.0
         version: 2.4.15
@@ -49,24 +52,15 @@ packages:
     resolution: {integrity: sha512-sB7CokCM6s76SLJmccysbnFR+MDik6udKfj2+9ZsmTLV0/t73veIeCDKbvWJmbW267ibx4HiGbPI7L+1+yjEbQ==}
     hasBin: true
 
-  '@aptos-labs/aptos-client@1.2.0':
-    resolution: {integrity: sha512-pBlIAT/W+Qa0TOr/318U8r0Gxw/jfyRLcvDGMEXgcVrPqO9Qhwsmozw6LPPIZ963FB7smwIaMeexWFDs3zijcg==}
-    engines: {node: '>=15.10.0'}
-    deprecated: This version is deprecated.  Please upgrade to version 2.1.0 or later.
+  '@aptos-labs/aptos-client@2.2.0':
+    resolution: {integrity: sha512-lYgHI8ehgD+Ykhix0IwzLaTCknHp1KNmExbq2bPZk8IeTwQg79D5BOkD46MjW0jGbJbl+J/RBtVF9vM7Te/hWA==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
-      axios: ^1.8.4
       got: ^11.8.6
 
-  '@aptos-labs/aptos-dynamic-transaction-composer@0.1.6':
-    resolution: {integrity: sha512-reIq7g/J02nRT6XILCX51zA9n7n0lwxZQB56fVaE2D3WB5Lt6qgw71ITlt2mvng/x/r8gY7bYyyUhKAx4hMuBw==}
-
-  '@aptos-labs/script-composer-pack@0.0.9':
-    resolution: {integrity: sha512-Y3kA1rgF65HETgoTn2omDymsgO+fnZouPLrKJZ9sbxTGdOekIIHtGee3A2gk84eCqa02ZKBumZmP+IDCXRtU/g==}
-
-  '@aptos-labs/ts-sdk@1.39.0':
-    resolution: {integrity: sha512-VFEWZsqb8Mto8XbLK8lDRdUvyHjp+geiwFxRzRcQK6HftMGB4bYuEsOI2Vy6u/TqkUft8DvmpV5yX027R5/SMQ==}
+  '@aptos-labs/ts-sdk@5.2.1':
+    resolution: {integrity: sha512-kazYjqfsPCBx2UJI+nYUOb6Ov7q7brSgYEfxp2sP27IeJWdDNa50lfs0WIpDJ92kQxdtlm9q3ZWw7Toh9f1gxQ==}
     engines: {node: '>=20.0.0'}
-    deprecated: This version is deprecated, please upgrade to 5.2.1, or the latest version
 
   '@aptos-labs/workspace@file:../../workspace':
     resolution: {directory: ../../workspace, type: directory}
@@ -287,8 +281,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  axios@1.14.0:
-    resolution: {integrity: sha512-3Y8yrqLSwjuzpXuZ0oIYZ/XGgLwUIBU3uLvbcpb0pidD9ctpShJd43KSlEEkVQg6DS0G9NKyzOvBfUtDKEyHvQ==}
+  axios@1.16.0:
+    resolution: {integrity: sha512-6hp5CwvTPlN2A31g5dxnwAX0orzM7pmCRDLnZSX772mv8WDqICwFjowHuPs04Mc8deIld1+ejhtaMn5vp6b+1w==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -1085,38 +1079,28 @@ snapshots:
     dependencies:
       commander: 12.1.0
 
-  '@aptos-labs/aptos-client@1.2.0(axios@1.14.0)(got@11.8.6)':
+  '@aptos-labs/aptos-client@2.2.0(got@11.8.6)':
     dependencies:
-      axios: 1.14.0
       got: 11.8.6
 
-  '@aptos-labs/aptos-dynamic-transaction-composer@0.1.6': {}
-
-  '@aptos-labs/script-composer-pack@0.0.9':
-    dependencies:
-      '@aptos-labs/aptos-dynamic-transaction-composer': 0.1.6
-
-  '@aptos-labs/ts-sdk@1.39.0(axios@1.14.0)(got@11.8.6)':
+  '@aptos-labs/ts-sdk@5.2.1(got@11.8.6)':
     dependencies:
       '@aptos-labs/aptos-cli': 1.1.1
-      '@aptos-labs/aptos-client': 1.2.0(axios@1.14.0)(got@11.8.6)
-      '@aptos-labs/script-composer-pack': 0.0.9
+      '@aptos-labs/aptos-client': 2.2.0(got@11.8.6)
       '@noble/curves': 1.9.7
       '@noble/hashes': 1.8.0
       '@scure/bip32': 1.7.0
       '@scure/bip39': 1.6.0
       eventemitter3: 5.0.4
-      form-data: 4.0.5
       js-base64: 3.7.8
       jwt-decode: 4.0.0
       poseidon-lite: 0.2.1
     transitivePeerDependencies:
-      - axios
       - got
 
-  '@aptos-labs/workspace@file:../../workspace(@aptos-labs/ts-sdk@1.39.0(axios@1.14.0)(got@11.8.6))(chai@4.5.0)':
+  '@aptos-labs/workspace@file:../../workspace(@aptos-labs/ts-sdk@5.2.1(got@11.8.6))(chai@4.5.0)':
     dependencies:
-      '@aptos-labs/ts-sdk': 1.39.0(axios@1.14.0)(got@11.8.6)
+      '@aptos-labs/ts-sdk': 5.2.1(got@11.8.6)
       chai: 4.5.0
       commander: 12.1.0
       find-up: 2.1.0
@@ -1184,7 +1168,7 @@ snapshots:
       '@initia/initia.proto': 1.0.6(google-protobuf@3.21.4)
       '@initia/opinit.proto': 1.0.3(google-protobuf@3.21.4)
       '@mysten/bcs': 1.9.2
-      axios: 1.14.0
+      axios: 1.16.0
       bech32: 2.0.0
       bignumber.js: 9.3.1
       bip32: 5.0.1(typescript@5.9.3)
@@ -1262,9 +1246,9 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@thalalabs/surf@1.10.0(@aptos-labs/ts-sdk@1.39.0(axios@1.14.0)(got@11.8.6))(google-protobuf@3.21.4)(typescript@5.9.3)':
+  '@thalalabs/surf@1.10.0(@aptos-labs/ts-sdk@5.2.1(got@11.8.6))(google-protobuf@3.21.4)(typescript@5.9.3)':
     dependencies:
-      '@aptos-labs/ts-sdk': 1.39.0(axios@1.14.0)(got@11.8.6)
+      '@aptos-labs/ts-sdk': 5.2.1(got@11.8.6)
       '@initia/initia.js': 1.1.0(google-protobuf@3.21.4)(typescript@5.9.3)
     transitivePeerDependencies:
       - bufferutil
@@ -1337,7 +1321,7 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  axios@1.14.0:
+  axios@1.16.0:
     dependencies:
       follow-redirects: 1.16.0
       form-data: 4.0.5
