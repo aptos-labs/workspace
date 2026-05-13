@@ -15,8 +15,8 @@
   "dependencies": {
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.5",
-    "@aptos-labs/ts-sdk": "^1.30.0",
+    "next": "15.5.18",
+    "@aptos-labs/ts-sdk": "^6.3.1",
     "@aptos-labs/wallet-adapter-react": "^3.5.0"
   },
   "devDependencies": {
@@ -30,5 +30,10 @@
     "@types/mocha": "^10.0.7",
     "chai": "4",
     "ts-node": "latest"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss": "8.5.10"
+    }
   }
 }
