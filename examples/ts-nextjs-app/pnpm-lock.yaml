@@ -27,6 +27,9 @@ importers:
         specifier: ^18
         version: 18.3.1(react@18.3.1)
     devDependencies:
+      '@aptos-labs/aptos-cli':
+        specifier: ^3.0.0
+        version: 3.0.0
       '@aptos-labs/workspace':
         specifier: file:../../workspace
         version: file:../../workspace(@aptos-labs/ts-sdk@6.3.1(got@11.8.6))(chai@4.5.0)
@@ -79,6 +82,13 @@ packages:
 
   '@aptos-labs/aptos-cli@1.1.1':
     resolution: {integrity: sha512-sB7CokCM6s76SLJmccysbnFR+MDik6udKfj2+9ZsmTLV0/t73veIeCDKbvWJmbW267ibx4HiGbPI7L+1+yjEbQ==}
+    hasBin: true
+
+  '@aptos-labs/aptos-cli@3.0.0':
+    resolution: {integrity: sha512-fw9Ph6pe9l/RW6LMqjpxrHiWo2T/gtYWZsRxgl4PqVroavGF13YEQWlUnjJfWgVi1wQHpQcoJ1eYbYsPFu2sVg==}
+    engines: {node: '>=22'}
+    cpu: [x64, arm64]
+    os: [darwin, linux, win32]
     hasBin: true
 
   '@aptos-labs/aptos-client@1.2.0':
@@ -776,6 +786,10 @@ packages:
   commander@12.1.0:
     resolution: {integrity: sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==}
     engines: {node: '>=18'}
+
+  commander@14.0.3:
+    resolution: {integrity: sha512-H+y0Jo/T1RZ9qPP4Eh1pkcQcLRglraJaSLoyOtHxu6AapkjWVCy2Sit1QQ4x3Dng8qDlSsZEet7g5Pq06MvTgw==}
+    engines: {node: '>=20'}
 
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
@@ -1501,6 +1515,10 @@ snapshots:
     dependencies:
       commander: 12.1.0
 
+  '@aptos-labs/aptos-cli@3.0.0':
+    dependencies:
+      commander: 14.0.3
+
   '@aptos-labs/aptos-client@1.2.0(axios@1.16.1)(got@11.8.6)':
     dependencies:
       axios: 1.16.1
@@ -2198,6 +2216,8 @@ snapshots:
       delayed-stream: 1.0.0
 
   commander@12.1.0: {}
+
+  commander@14.0.3: {}
 
   core-util-is@1.0.3: {}
 
