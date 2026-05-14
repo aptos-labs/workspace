@@ -25,6 +25,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@aptos-labs/aptos-cli": "^3.0.0",
     "@aptos-labs/workspace": "file:../../workspace",
     "@biomejs/biome": "^2.0.0",
     "@types/chai": "4",

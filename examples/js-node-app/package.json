@@ -17,6 +17,7 @@
     "@aptos-labs/ts-sdk": "^1.30.0"
   },
   "devDependencies": {
+    "@aptos-labs/aptos-cli": "^3.0.0",
     "@aptos-labs/workspace": "file:../../workspace",
     "@biomejs/biome": "^2.0.0",
     "chai": "4",
