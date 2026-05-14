@@ -2,9 +2,10 @@
   "name": "move-program",
   "version": "1.0.0",
   "main": "index.js",
+  "packageManager": "pnpm@10.33.2",
   "scripts": {
-    "test": "npx aptos-workspace test",
-    "test:ci": "npx aptos-workspace test --timeout 300000"
+    "test": "pnpm exec aptos-workspace test",
+    "test:ci": "pnpm exec aptos-workspace test --timeout 300000"
   },
   "keywords": [],
   "author": "",

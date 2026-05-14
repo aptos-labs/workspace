@@ -11,6 +11,7 @@
   "main": "./dist/external/index.js",
   "module": "./dist/external/esm/index.mjs",
   "types": "./dist/external/index.d.ts",
+  "packageManager": "pnpm@10.33.2",
   "scripts": {
     "build:clean": "rm -rf dist",
     "build": "pnpm run build:clean && tsup",

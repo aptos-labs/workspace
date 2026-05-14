@@ -2,6 +2,7 @@
   "name": "ts-next-app",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@10.33.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,8 +10,8 @@
     "lint": "biome lint .",
     "fmt": "biome format --write .",
     "check": "biome check --write .",
-    "test": "npx aptos-workspace test",
-    "test:ci": "npx aptos-workspace test --timeout 300000"
+    "test": "pnpm exec aptos-workspace test",
+    "test:ci": "pnpm exec aptos-workspace test --timeout 300000"
   },
   "dependencies": {
     "react": "^18",
