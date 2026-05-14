@@ -15,7 +15,7 @@ export const init = async (result: PromptResult) => {
   }
 
   console.log(
-    "Workspace has initialized. Run `npx aptos-workspace test` to run tests"
+    "Workspace has initialized. Run `pnpm exec aptos-workspace test` to run tests"
   );
 };
 

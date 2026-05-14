@@ -31,8 +31,8 @@ export class TestNode {
 
     const configVerbose = getUserConfigVerbose();
 
-    const cliCommand = "npx";
-    const cliArgs: string[] = ["aptos", "workspace", "run"];
+    const cliCommand = "pnpm";
+    const cliArgs: string[] = ["exec", "aptos", "workspace", "run"];
 
     const childProcess = spawn(cliCommand, cliArgs, { detached: false, stdio: ['pipe', 'pipe', 'ignore'], shell: true });
 

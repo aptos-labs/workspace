@@ -27,11 +27,11 @@ function max_num_jobs(): number {
 
 async function checkAptosVersion(): Promise<void> {
   return new Promise((resolve, reject) => {
-    exec("npx aptos --version", (error, stdout, stderr) => {
+    exec("pnpm exec aptos --version", (error, stdout, stderr) => {
       if (error) {
         return reject(
           new Error(
-            "Failed to run npx aptos, have you installed it properly?\n" +
+            "Failed to run pnpm exec aptos, have you installed it properly?\n" +
             "If your project uses `yarn`, you need to run `yarn add --dev @aptos-labs/ts-sdk`.\n" +
             "If your project uses `pnpm`, you need to run `pnpm add -D @aptos-labs/aptos-cli`."
           )
@@ -50,7 +50,7 @@ async function checkAptosVersion(): Promise<void> {
       if (semver.lt(version, minimumVersion)) {
         return reject(
           new Error(
-            `Aptos CLI version needs to be at least ${minimumVersion}, please run "npx aptos --update" to update.\n` +
+            `Aptos CLI version needs to be at least ${minimumVersion}, please run "pnpm exec aptos --update" to update.\n` +
             "You might need to restart your shell in a new window for the update to take effect."
           )
         );

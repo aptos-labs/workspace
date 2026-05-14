@@ -3,10 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
+  "packageManager": "pnpm@10.33.2",
   "scripts": {
     "dev": "ts-node index.ts",
-    "test": "npx aptos-workspace test",
-    "test:ci": "npx aptos-workspace test --timeout 300000",
+    "test": "pnpm exec aptos-workspace test",
+    "test:ci": "pnpm exec aptos-workspace test --timeout 300000",
     "build": "tsc",
     "lint": "biome lint .",
     "fmt": "biome format --write .",
