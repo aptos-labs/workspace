@@ -28,9 +28,9 @@
     "commander": "^12.1.0",
     "find-up": "^2.1.0",
     "fs-extra": "^7.0.1",
-    "mocha": "^10.7.0",
+    "mocha": "^10.8.2",
     "prompts": "^2.4.2",
-    "toml": "^3.0.0",
+    "toml": "^5.0.1",
     "tree-kill": "1.2.2",
     "tsconfig-paths": "^4.2.0",
     "semver": "^7.5.8"
@@ -48,7 +48,7 @@
     }
   },
   "devDependencies": {
-    "@aptos-labs/ts-sdk": "^5.2.1",
+    "@aptos-labs/ts-sdk": "^6.3.1",
     "@types/chai": "^4.2.0",
     "@types/find-up": "^2.1.1",
     "@types/fs-extra": "^5.1.0",
@@ -57,14 +57,17 @@
     "@types/semver": "^7.5.8",
     "@biomejs/biome": "^2.0.0",
     "chai": "^4.2.0",
-    "mocha": "^10.7.0",
+    "mocha": "^10.8.2",
     "ts-node": "10.9.1",
-    "tsup": "^8.2.4",
+    "tsup": "^8.5.1",
     "typescript": "^5.2.2"
   },
   "pnpm": {
     "overrides": {
-      "serialize-javascript": "7.0.5"
+      "serialize-javascript": "^7.1.4",
+      "esbuild": "^0.28.2",
+      "js-yaml": "^4.3.2",
+      "brace-expansion": "^2.1.8"
     }
   }
 }

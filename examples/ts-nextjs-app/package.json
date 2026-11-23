@@ -16,7 +16,7 @@
   "dependencies": {
     "react": "^18",
     "react-dom": "^18",
-    "next": "15.5.18",
+    "next": "15.5.29",
     "@aptos-labs/ts-sdk": "^6.3.1",
     "@aptos-labs/wallet-adapter-react": "^3.5.0"
   },
@@ -35,7 +35,14 @@
   },
   "pnpm": {
     "overrides": {
-      "postcss": "8.5.10"
+      "postcss": "^8.5.33",
+      "sharp": "^0.35.5",
+      "nanoid": "^3.3.20",
+      "source-map-js": "^1.2.4",
+      "uuid": "^11.1.1",
+      "form-data": "^4.0.6",
+      "axios": "^1.21.1",
+      "follow-redirects": "^1.16.3"
     }
   }
 }
