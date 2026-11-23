@@ -5,25 +5,29 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  axios: 1.16.0
+  axios: ^1.21.1
+  form-data: ^4.0.6
+  follow-redirects: ^1.16.3
+  ws: ^8.23.0
+  valibot: ^1.5.0
 
 importers:
 
   .:
     dependencies:
       '@aptos-labs/ts-sdk':
-        specifier: ^5.2.1
-        version: 5.2.1(got@11.8.6)
+        specifier: ^6.3.1
+        version: 6.3.1(got@11.8.6)
       '@thalalabs/surf':
-        specifier: ^1.7.3
-        version: 1.10.0(@aptos-labs/ts-sdk@5.2.1(got@11.8.6))(google-protobuf@3.21.4)(typescript@5.9.3)
+        specifier: ^2.0.3
+        version: 2.0.3(@aptos-labs/ts-sdk@6.3.1(got@11.8.6))(google-protobuf@3.21.4)(typescript@5.9.3)
     devDependencies:
       '@aptos-labs/aptos-cli':
         specifier: ^3.0.0
         version: 3.0.0
       '@aptos-labs/workspace':
         specifier: file:../../workspace
-        version: file:../../workspace(@aptos-labs/ts-sdk@5.2.1(got@11.8.6))(chai@4.5.0)
+        version: file:../../workspace(@aptos-labs/ts-sdk@6.3.1(got@11.8.6))(chai@4.5.0)
       '@biomejs/biome':
         specifier: ^2.0.0
         version: 2.4.15
@@ -68,8 +72,8 @@ packages:
     peerDependencies:
       got: ^11.8.6
 
-  '@aptos-labs/ts-sdk@5.2.1':
-    resolution: {integrity: sha512-kazYjqfsPCBx2UJI+nYUOb6Ov7q7brSgYEfxp2sP27IeJWdDNa50lfs0WIpDJ92kQxdtlm9q3ZWw7Toh9f1gxQ==}
+  '@aptos-labs/ts-sdk@6.3.1':
+    resolution: {integrity: sha512-1C13IaHgNIo6MHMTQEcDzeuqTNv++evdY+Ph3IAGLnHlG7Yevdxw50W0nyAJRf4bLzQDI20wfJ66wD2qMg7Rew==}
     engines: {node: '>=20.0.0'}
 
   '@aptos-labs/workspace@file:../../workspace':
@@ -202,19 +206,28 @@ packages:
     resolution: {integrity: sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==}
     engines: {node: '>=10'}
 
-  '@thalalabs/surf@1.10.0':
-    resolution: {integrity: sha512-kNLU1Llw0+MNVk15J3m0IaW9UEnsUq1rcCsiqLfuqoNhfQwYIEg7pTvl6GQuuj7MSgeQzJ4Wr3fiZJwBJPuzqg==}
+  '@thalalabs/surf@2.0.3':
+    resolution: {integrity: sha512-CSHbyRb/y7EzRDdpoInlQ6K7n91PQ1SYsw2YZ06wiRWhX66SXMvTZYoC+OeCuG2a3ntZg4Txfw4iQPrUZuE94w==}
     peerDependencies:
       '@aptos-labs/ts-sdk': ^6.0.0
       '@aptos-labs/wallet-adapter-react': ^8.2.1
-      '@initia/react-wallet-widget': ^1.9.8
+      '@initia/interwovenkit-react': ^2.4.3
+      '@tanstack/react-query': ^5.90.21
       react: ^18.2.0
+      viem: ^2.46.3
+      wagmi: ^2.17.2
     peerDependenciesMeta:
       '@aptos-labs/wallet-adapter-react':
         optional: true
-      '@initia/react-wallet-widget':
+      '@initia/interwovenkit-react':
+        optional: true
+      '@tanstack/react-query':
         optional: true
       react:
+        optional: true
+      viem:
+        optional: true
+      wagmi:
         optional: true
 
   '@tsconfig/node10@1.0.12':
@@ -259,6 +272,10 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  agent-base@6.0.2:
+    resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
+    engines: {node: '>= 6.0.0'}
+
   ansi-colors@4.1.3:
     resolution: {integrity: sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw==}
     engines: {node: '>=6'}
@@ -291,8 +308,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  axios@1.16.0:
-    resolution: {integrity: sha512-6hp5CwvTPlN2A31g5dxnwAX0orzM7pmCRDLnZSX772mv8WDqICwFjowHuPs04Mc8deIld1+ejhtaMn5vp6b+1w==}
+  axios@1.21.1:
+    resolution: {integrity: sha512-6eI5Q/Y4u/Um9dDlsRoq5pY2rxnUTv+L4PpLitnbk/i4jb3MxLZ5CsN5Ih3IysbeRYK4pR+P7qfMsOQl9fwwFQ==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -526,8 +543,8 @@ packages:
     resolution: {integrity: sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==}
     hasBin: true
 
-  follow-redirects@1.16.0:
-    resolution: {integrity: sha512-y5rN/uOsadFT/JfYwhxRS5R7Qce+g3zG97+JrtFZlC9klX/W5hD7iiLzScI4nZqUS7DNUdhPgw4xI8W2LuXlUw==}
+  follow-redirects@1.16.3:
+    resolution: {integrity: sha512-toOSoqN6d51Wjf1aOFJYcoVv1aND9rj/CwjLU0Vz40oDuSpWDayCeKe4JpL5NL0WdFvoOOCI3BRo69HahjbR1A==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -539,8 +556,8 @@ packages:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
     engines: {node: '>= 0.4'}
 
-  form-data@4.0.5:
-    resolution: {integrity: sha512-8RipRLol37bNs2bhoV67fiTEvdTrbMUYcFTiy3+wuuOnUog2QBHCZWXDRijWQfAkhBj2Uf5UnVaiWwA5vdd82w==}
+  form-data@4.0.6:
+    resolution: {integrity: sha512-vKatAh4SlVfgbv+YtmhiRjhEMJsYpsG1Y2rMQtR+SVSbytsSD1YGzDIcrAJmdFec88u/+VoGmxnl+80gL1tRCQ==}
     engines: {node: '>= 6'}
 
   fs-extra@7.0.1:
@@ -622,8 +639,8 @@ packages:
   hash.js@1.1.7:
     resolution: {integrity: sha512-taOaskGt4z4SOANNseOviYDvjEJinIkRgmp7LbKP2YTTmVxWBl87s/uzK9r+44BclBSp2X7K1hqeNfz9JbBeXA==}
 
-  hasown@2.0.3:
-    resolution: {integrity: sha512-ej4AhfhfL2Q2zpMmLo7U1Uv9+PyhIZpgQLGT1F9miIGmiCJIoCgSmczFdrc97mWT4kVY72KA+WnnhJ5pghSvSg==}
+  hasown@2.0.4:
+    resolution: {integrity: sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==}
     engines: {node: '>= 0.4'}
 
   he@1.2.0:
@@ -639,6 +656,10 @@ packages:
   http2-wrapper@1.0.3:
     resolution: {integrity: sha512-V+23sDMr12Wnz7iTcDeJr3O6AIxlnvT/bmaAAAP/Xda35C90p9599p0F1eHR/N1KILWSoWVAiOMFjBBXaXSMxg==}
     engines: {node: '>=10.19.0'}
+
+  https-proxy-agent@5.0.1:
+    resolution: {integrity: sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==}
+    engines: {node: '>= 6'}
 
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
@@ -971,8 +992,9 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  toml@3.0.0:
-    resolution: {integrity: sha512-y/mWCZinnvxjTKYhJ+pYxwD0mRLVvOtdS2Awbgxln6iEnt4rk0yBxeSBHkGJcPucRiG0e55mwWp+g/05rsrd6w==}
+  toml@5.0.1:
+    resolution: {integrity: sha512-EqYNA/YvUNndrA2B3O2ojzLQoTQrBxeZ9UIjQwk8t10oe6n7dwclBwd9IdZQTOKwe6vWX+AXtl6IntXRbepdxQ==}
+    engines: {node: '>=20'}
 
   tree-kill@1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
@@ -1026,8 +1048,8 @@ packages:
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
-  valibot@1.4.0:
-    resolution: {integrity: sha512-iC/x7fVcSyOwlm/VSt7RlHnzNGLGvR9GnxdifUeWoCJo0q4ZZvrVkIHC6faTlkxG47I2Y4UrFquPuVHCrOnrLg==}
+  valibot@1.5.0:
+    resolution: {integrity: sha512-nil6AkP2TChWL43Z5uJ6GTxX01CUA+g8LWUM+N/rB9NBbkUMaUsi9PUNzlUPgoKASgmx9f7eGOYpJ04/fSa6FQ==}
     peerDependencies:
       typescript: '>=5'
     peerDependenciesMeta:
@@ -1051,8 +1073,8 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
-  ws@8.20.1:
-    resolution: {integrity: sha512-It4dO0K5v//JtTXuPkfEOaI3uUN87iYPnqo/ZzqCoG3g8uhA66QUMs/SrM0YK7/NAu+r4LMh/9dq2A7k+rHs+w==}
+  ws@8.23.0:
+    resolution: {integrity: sha512-wCkmX8QMOrKjgO8HW2WyDbTSGeqkocxgDzS9iR79rEAexty6/2qzilx3Ag8Tqf9ykop3irLKle0MtVn5qjVnoQ==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -1101,7 +1123,7 @@ snapshots:
     dependencies:
       got: 11.8.6
 
-  '@aptos-labs/ts-sdk@5.2.1(got@11.8.6)':
+  '@aptos-labs/ts-sdk@6.3.1(got@11.8.6)':
     dependencies:
       '@aptos-labs/aptos-cli': 1.1.1
       '@aptos-labs/aptos-client': 2.2.0(got@11.8.6)
@@ -1116,9 +1138,9 @@ snapshots:
     transitivePeerDependencies:
       - got
 
-  '@aptos-labs/workspace@file:../../workspace(@aptos-labs/ts-sdk@5.2.1(got@11.8.6))(chai@4.5.0)':
+  '@aptos-labs/workspace@file:../../workspace(@aptos-labs/ts-sdk@6.3.1(got@11.8.6))(chai@4.5.0)':
     dependencies:
-      '@aptos-labs/ts-sdk': 5.2.1(got@11.8.6)
+      '@aptos-labs/ts-sdk': 6.3.1(got@11.8.6)
       chai: 4.5.0
       commander: 12.1.0
       find-up: 2.1.0
@@ -1126,7 +1148,7 @@ snapshots:
       mocha: 10.8.2
       prompts: 2.4.2
       semver: 7.8.0
-      toml: 3.0.0
+      toml: 5.0.1
       tree-kill: 1.2.2
       tsconfig-paths: 4.2.0
 
@@ -1186,7 +1208,7 @@ snapshots:
       '@initia/initia.proto': 1.0.6(google-protobuf@3.21.4)
       '@initia/opinit.proto': 1.0.3(google-protobuf@3.21.4)
       '@mysten/bcs': 1.9.2
-      axios: 1.16.0
+      axios: 1.21.1
       bech32: 2.0.0
       bignumber.js: 9.3.1
       bip32: 5.0.1(typescript@5.9.3)
@@ -1197,11 +1219,12 @@ snapshots:
       ripemd160: 2.0.3
       secp256k1: 5.0.1
       semver: 7.8.0
-      ws: 8.20.1
+      ws: 8.23.0
     transitivePeerDependencies:
       - bufferutil
       - debug
       - google-protobuf
+      - supports-color
       - typescript
       - utf-8-validate
 
@@ -1264,14 +1287,15 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@thalalabs/surf@1.10.0(@aptos-labs/ts-sdk@5.2.1(got@11.8.6))(google-protobuf@3.21.4)(typescript@5.9.3)':
+  '@thalalabs/surf@2.0.3(@aptos-labs/ts-sdk@6.3.1(got@11.8.6))(google-protobuf@3.21.4)(typescript@5.9.3)':
     dependencies:
-      '@aptos-labs/ts-sdk': 5.2.1(got@11.8.6)
+      '@aptos-labs/ts-sdk': 6.3.1(got@11.8.6)
       '@initia/initia.js': 1.1.0(google-protobuf@3.21.4)(typescript@5.9.3)
     transitivePeerDependencies:
       - bufferutil
       - debug
       - google-protobuf
+      - supports-color
       - typescript
       - utf-8-validate
 
@@ -1314,6 +1338,12 @@ snapshots:
 
   acorn@8.16.0: {}
 
+  agent-base@6.0.2:
+    dependencies:
+      debug: 4.4.3(supports-color@8.1.1)
+    transitivePeerDependencies:
+      - supports-color
+
   ansi-colors@4.1.3: {}
 
   ansi-regex@5.0.1: {}
@@ -1339,13 +1369,15 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  axios@1.16.0:
+  axios@1.21.1:
     dependencies:
-      follow-redirects: 1.16.0
-      form-data: 4.0.5
+      follow-redirects: 1.16.3
+      form-data: 4.0.6
+      https-proxy-agent: 5.0.1
       proxy-from-env: 2.1.0
     transitivePeerDependencies:
       - debug
+      - supports-color
 
   balanced-match@1.0.2: {}
 
@@ -1364,7 +1396,7 @@ snapshots:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
       uint8array-tools: 0.0.8
-      valibot: 1.4.0(typescript@5.9.3)
+      valibot: 1.5.0(typescript@5.9.3)
       wif: 5.0.0
     transitivePeerDependencies:
       - typescript
@@ -1562,7 +1594,7 @@ snapshots:
       es-errors: 1.3.0
       get-intrinsic: 1.3.0
       has-tostringtag: 1.0.2
-      hasown: 2.0.3
+      hasown: 2.0.4
 
   escalade@3.2.0: {}
 
@@ -1587,18 +1619,18 @@ snapshots:
 
   flat@5.0.2: {}
 
-  follow-redirects@1.16.0: {}
+  follow-redirects@1.16.3: {}
 
   for-each@0.3.5:
     dependencies:
       is-callable: 1.2.7
 
-  form-data@4.0.5:
+  form-data@4.0.6:
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
       es-set-tostringtag: 2.1.0
-      hasown: 2.0.3
+      hasown: 2.0.4
       mime-types: 2.1.35
 
   fs-extra@7.0.1:
@@ -1628,7 +1660,7 @@ snapshots:
       get-proto: 1.0.1
       gopd: 1.2.0
       has-symbols: 1.1.0
-      hasown: 2.0.3
+      hasown: 2.0.4
       math-intrinsics: 1.1.0
 
   get-proto@1.0.1:
@@ -1696,7 +1728,7 @@ snapshots:
       inherits: 2.0.4
       minimalistic-assert: 1.0.1
 
-  hasown@2.0.3:
+  hasown@2.0.4:
     dependencies:
       function-bind: 1.1.2
 
@@ -1714,6 +1746,13 @@ snapshots:
     dependencies:
       quick-lru: 5.1.1
       resolve-alpn: 1.2.1
+
+  https-proxy-agent@5.0.1:
+    dependencies:
+      agent-base: 6.0.2
+      debug: 4.4.3(supports-color@8.1.1)
+    transitivePeerDependencies:
+      - supports-color
 
   ieee754@1.2.1: {}
 
@@ -2023,7 +2062,7 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  toml@3.0.0: {}
+  toml@5.0.1: {}
 
   tree-kill@1.2.2: {}
 
@@ -2071,7 +2110,7 @@ snapshots:
 
   v8-compile-cache-lib@3.0.1: {}
 
-  valibot@1.4.0(typescript@5.9.3):
+  valibot@1.5.0(typescript@5.9.3):
     optionalDependencies:
       typescript: 5.9.3
 
@@ -2099,7 +2138,7 @@ snapshots:
 
   wrappy@1.0.2: {}
 
-  ws@8.20.1: {}
+  ws@8.23.0: {}
 
   y18n@5.0.8: {}
 
