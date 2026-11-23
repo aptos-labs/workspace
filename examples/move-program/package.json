@@ -18,5 +18,12 @@
     "@aptos-labs/aptos-cli": "^3.0.0",
     "@aptos-labs/workspace": "file:../../workspace",
     "chai": "^4.5.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "serialize-javascript": "^7.1.4",
+      "js-yaml": "^4.3.2",
+      "brace-expansion": "^2.1.8"
+    }
   }
 }
